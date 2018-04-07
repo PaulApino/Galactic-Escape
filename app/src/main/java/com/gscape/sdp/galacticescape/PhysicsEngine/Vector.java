@@ -24,6 +24,10 @@ public class Vector {
         return new Vector(x + aVector.x, y + aVector.y);
     }
 
+    public Vector subtract (Vector aVector) {
+        return new Vector(x - aVector.x, y - aVector.y);
+    }
+
     public Vector unitVector () {
         if (magnitude == 0) return new Vector(0, 0);
         return new Vector(x / magnitude, y / magnitude);

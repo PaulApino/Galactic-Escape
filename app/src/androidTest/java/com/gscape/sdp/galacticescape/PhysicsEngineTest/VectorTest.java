@@ -1,4 +1,4 @@
-package com.gscape.sdp.galacticescape;
+package com.gscape.sdp.galacticescape.PhysicsEngineTest;
 
 import org.junit.Test;
 
