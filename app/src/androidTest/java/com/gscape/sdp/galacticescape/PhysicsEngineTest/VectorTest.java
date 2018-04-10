@@ -6,5 +6,9 @@ import static org.junit.Assert.*;
 
 public class VectorTest {
 
+    @Test
+    public void testAssertion () {
+        assertTrue(false);
+    }
 
 }

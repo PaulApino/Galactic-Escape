@@ -38,4 +38,9 @@ public class Vector {
         Vector unitV = aVector.unitVector();
         return new Vector(magnitude * unitV.x, magnitude * unitV.y);
     }
+
+    public Vector projectFrom (double magnitude) {
+        Vector unitV = unitVector();
+        return new Vector(magnitude * unitV.x, magnitude * unitV.y);
+    }
 }

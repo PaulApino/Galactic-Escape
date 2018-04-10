@@ -3,36 +3,74 @@ package com.gscape.sdp.galacticescape.PhysicsEngine;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PhysicsEngine {
+public final class PhysicsEngine {
 
-    private final PhysicsEngine onlyInstance = new PhysicsEngine();
+    private static final double gravConst = 123;
+    private static final PhysicsEngine onlyInstance = new PhysicsEngine();
 
     private PhysicsEngine() {}
 
-    public final PhysicsEngine getEngine () { return onlyInstance; }
-
-    public final void update (ArrayList<SpaceObject> spaceObjects) {
-        if (spaceObjects.size() < 2) throw new IllegalArgumentException("not enough space objects for calculation");
-
-        ArrayList<NewtonGravSys>  isolatedSystems = new ArrayList<>(spaceObjects.size());
-
-        Iterator objectArr1 = spaceObjects.iterator();
-        Iterator objectArr2 = spaceObjects.iterator();
+    public static final void simulate (ArrayList<SpaceObject> spaceObjects) {
+        attract(spaceObjects);
+        changeVals(spaceObjects);
     }
 
-    private class NewtonGravSys {
+    private static final void attract (ArrayList<SpaceObject> spaceObjects) {
+        if (spaceObjects.size() < 2) throw new IllegalArgumentException("not enough space objects for calculation");
 
-        protected final double gravConst = 123;
-        protected final SpaceObject objectA, objectB;
-        protected final double force;
+        Iterator objectArr1 = spaceObjects.iterator();
+        Iterator objectArr2 = new ArrayList<>(spaceObjects).iterator();
 
-        protected NewtonGravSys(SpaceObject objectA, SpaceObject objectB) {
-            this.objectA = objectA;
-            this.objectB = objectB;
+        while (objectArr1.hasNext()) {
+            SpaceObject currentObjectA = (SpaceObject)objectArr1;
 
-            double distance = objectA.location().subtract(objectB.location()).magnitude();
+            objectArr2.next();
+            objectArr2.remove();
 
-            force = gravConst * (objectA.mass() * objectB.mass()) / (distance * distance);
+            while (objectArr2.hasNext()) {
+                newtonGravSystem((SpaceObject) objectArr2, currentObjectA);
+            }
+        }
+    }
+
+    private static final void newtonGravSystem (SpaceObject objectArr2, SpaceObject currentObjectA) {
+        SpaceObject currentObjectB = objectArr2;
+        Vector displacementAtoB = currentObjectB.location().subtract(currentObjectA.location());
+        Vector displacementBtoA = currentObjectA.location().subtract(currentObjectB.location());
+        double distance = displacementAtoB.magnitude();
+        double force = gravConst * (currentObjectA.mass() * currentObjectB.mass()) / (distance * distance);
+
+        Vector accelObjectA = displacementAtoB.projectFrom(force);
+        currentObjectA.setAcceleration(currentObjectA.acceleration().add(accelObjectA));
+
+        Vector accelObjectB = displacementBtoA.projectFrom(force);
+        currentObjectB.setAcceleration(currentObjectB.acceleration().add(accelObjectB));
+    }
+
+    private static final void changeVals (ArrayList<SpaceObject> spaceObjects) {
+        Iterator spaceObjArrA = spaceObjects.iterator();
+
+        while (spaceObjArrA.hasNext()) {
+            SpaceObject currentObject = (SpaceObject)spaceObjArrA.next();
+            currentObject.setLocation(currentObject.location().add(currentObject.velocity()));
+            currentObject.setVelocity(currentObject.velocity().add(currentObject.acceleration()));
+        }
+
+        spaceObjArrA = spaceObjects.iterator();
+
+        while (spaceObjArrA.hasNext()) {
+            SpaceObject objectA = (SpaceObject)spaceObjArrA.next();
+            if (!objectA.isCollided()) {
+                for (SpaceObject anObject : spaceObjects) {
+                    if(objectA != anObject && !anObject.isCollided()) {
+                        double distanceBetween = objectA.location().subtract(anObject.location()).magnitude();
+                        if (distanceBetween <= (objectA.collisionRadius() + anObject.collisionRadius())) {
+                            objectA.setCollided();
+                            anObject.setCollided();
+                        }
+                    }
+                }
+            }
         }
     }
 }
