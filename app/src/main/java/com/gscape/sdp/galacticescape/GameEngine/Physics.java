@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 public final class Physics {
 
-    private static final double gravConst = 123;
+    private static final double gravConst = 6.6708 / Math.pow(10, 20);
     private static final Physics onlyInstance = new Physics();
 
     private Physics() {}

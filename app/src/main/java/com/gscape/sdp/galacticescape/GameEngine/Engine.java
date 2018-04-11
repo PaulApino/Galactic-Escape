@@ -10,7 +10,9 @@ public class Engine {
         this.physicsObjects = physicsObjects;
     }
 
-    public void run () {
-
+    public void run (int cycles) {
+        for (int i = 0;  i < cycles; i++) {
+            Physics.simulate(physicsObjects);
+        }
     }
 }
