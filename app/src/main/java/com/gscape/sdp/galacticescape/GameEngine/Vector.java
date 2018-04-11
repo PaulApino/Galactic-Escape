@@ -1,4 +1,4 @@
-package com.gscape.sdp.galacticescape.PhysicsEngine;
+package com.gscape.sdp.galacticescape.GameEngine;
 
 public class Vector {
 
@@ -10,8 +10,13 @@ public class Vector {
         magnitude = Math.sqrt((x * x) + (y * y));
     }
 
-    public static Vector make (double x, double y) {
+    public static Vector makeCoordinate (double x, double y) {
         return new Vector(x, y);
+    }
+
+    public static Vector makePolar (double r, double theta) {
+        double tanTheta = Math.tan(theta);
+        return new Vector(tanTheta / r * Math.sin(theta), r * Math.cos(theta) * tanTheta);
     }
 
     public double x () { return x; }

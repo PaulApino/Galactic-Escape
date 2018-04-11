@@ -1,4 +1,4 @@
-package com.gscape.sdp.galacticescape.PhysicsEngine;
+package com.gscape.sdp.galacticescape.GameEngine;
 
 public class SpaceObject {
 

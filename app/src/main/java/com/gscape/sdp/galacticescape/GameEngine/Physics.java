@@ -1,14 +1,14 @@
-package com.gscape.sdp.galacticescape.PhysicsEngine;
+package com.gscape.sdp.galacticescape.GameEngine;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public final class PhysicsEngine {
+public final class Physics {
 
     private static final double gravConst = 123;
-    private static final PhysicsEngine onlyInstance = new PhysicsEngine();
+    private static final Physics onlyInstance = new Physics();
 
-    private PhysicsEngine() {}
+    private Physics() {}
 
     public static final void simulate (ArrayList<SpaceObject> spaceObjects) {
         attract(spaceObjects);
