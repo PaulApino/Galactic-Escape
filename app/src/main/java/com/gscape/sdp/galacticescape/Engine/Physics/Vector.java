@@ -23,7 +23,7 @@ public class Vector {
      * @param y y coordinate.
      * @return returns a 2 dimensional vector object.
      */
-    public static Vector make2DPoint (double x, double y) {
+    public static Vector make2D(double x, double y) {
         return new Vector(x, y, 0);
     }
 
@@ -34,7 +34,7 @@ public class Vector {
      * @param z z coordinate.
      * @return returns a 3 dimensional vector object.
      */
-    public static Vector make3DPoint (double x, double y, double z) {
+    public static Vector make3D(double x, double y, double z) {
         return new Vector(x, y, z);
     }
 
@@ -87,5 +87,13 @@ public class Vector {
         double mag = getMagnitude();
         Vector unitVector = new Vector(x / mag, y / mag, z / mag);
         return new Vector(unitVector.x * magnitude, unitVector.y * magnitude, unitVector.z * magnitude);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Vector) {
+            Vector aVector = (Vector)obj;
+            return (x == aVector.x && y == aVector.y && z == aVector.z);
+        } return false;
     }
 }
