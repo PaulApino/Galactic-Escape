@@ -44,6 +44,9 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
                 System.exit(0);
             }
+
+
+            //quiting game
         });
 
 
