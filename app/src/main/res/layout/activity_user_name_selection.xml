@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Introduction_togame">
-
-
+    tools:context=".User_name_selection">
 
 
     <ImageView
@@ -25,19 +23,31 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="71dp"
-        android:text="Introduction"
+        android:text="User Name Selection"
         android:textColor="@android:color/white"
         android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/skip_intro_bt"
+    <EditText
+        android:id="@+id/user_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="13dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="164dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Enter Space Name"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/save_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="211dp"
         android:background="@android:drawable/button_onoff_indicator_on"
-        android:text="Skip" />
+        android:text="Create User" />
 
 
 </RelativeLayout>

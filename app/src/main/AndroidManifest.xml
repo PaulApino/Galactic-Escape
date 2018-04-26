@@ -20,11 +20,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".FullscreenActivity" />
+<<<<<<< HEAD
         <!--<activity-->
             <!--android:name=".Display.GamePlayDisplay"-->
             <!--android:configChanges="orientation|keyboardHidden|screenSize"-->
             <!--android:label="@string/title_activity_game_play_display"-->
             <!--android:theme="@style/FullscreenTheme"></activity>-->
+=======
+        <activity android:name=".Introduction_togame" />
+        <activity android:name=".User_name_selection"></activity>
+>>>>>>> origin/master
     </application>
 
 </manifest>
