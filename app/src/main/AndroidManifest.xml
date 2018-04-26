@@ -19,8 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FullscreenActivity"></activity>
-        <activity android:name=".Introduction_togame"></activity>
+        <activity android:name=".FullscreenActivity" />
+        <activity android:name=".Introduction_togame" />
+        <activity
+            android:name=".Display.GamePlayDisplay"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game_play_display"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

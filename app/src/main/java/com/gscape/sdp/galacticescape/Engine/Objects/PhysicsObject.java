@@ -10,6 +10,7 @@ public class PhysicsObject {
 
     private final double mass, collisionRadius;
     private Vector location, velocity, acceleration;
+    private boolean collided;
 
     /**
      * Makes a PhysicsObject from the given values.
@@ -25,6 +26,7 @@ public class PhysicsObject {
         this.location = location;
         this.velocity = velocity;
         this.acceleration = acceleration;
+        collided = false;
     }
 
     public double getMass() {
@@ -34,6 +36,8 @@ public class PhysicsObject {
     public double getCollisionRadius() {
         return collisionRadius;
     }
+
+    public boolean getCollided() { return collided; }
 
     public Vector getLocation() {
         return location;
@@ -46,6 +50,8 @@ public class PhysicsObject {
     public Vector getAcceleration() {
         return acceleration;
     }
+
+    public void setCollided() { collided = true; }
 
     public void setLocation(Vector location) {
         this.location = location;

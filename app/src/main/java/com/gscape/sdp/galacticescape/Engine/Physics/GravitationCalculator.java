@@ -26,9 +26,9 @@ public class GravitationCalculator {
      */
     public void simulate (PhysicsObject [] objects) {
         if (objects.length < 2) throw new IllegalArgumentException("Not enough objects to simulate gravity");
-        int tempIndex = 1;
 
         //Calculates gravity effect for each PhysicsObject
+        int tempIndex = 1;
         for (PhysicsObject currentObject : objects) {
             for (int i = tempIndex; i <  objects.length; i++) {
                 double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
@@ -37,6 +37,34 @@ public class GravitationCalculator {
                 objects[i].setAcceleration(objects[i].getAcceleration().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
             }
             tempIndex++;
+        }
+    }
+
+    public void update (PhysicsObject [] objects) {
+        for (PhysicsObject currentObject : objects) {
+            currentObject.setLocation(currentObject.getLocation().add(currentObject.getVelocity()));
+        }
+
+        if (objects.length > 1) {
+            int tempIndex = 1;
+            for (PhysicsObject currentObject : objects) {
+                for (int i = tempIndex; i < objects.length; i++) {
+                    double collisionDistance = currentObject.getCollisionRadius() + objects[i].getCollisionRadius();
+                    double objectDistance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();
+                    double distanceDifference = objectDistance - collisionDistance;
+                    if (distanceDifference < 5.0) {
+                        currentObject.setCollided();
+                        objects[i].setCollided();
+                    }
+                }
+                tempIndex++;
+            }
+        }
+
+        for (PhysicsObject currentObject : objects) {
+            if (!currentObject.getCollided()) {
+                currentObject.setVelocity(currentObject.getVelocity().add(currentObject.getAcceleration()));
+            }
         }
     }
 }

@@ -30,6 +30,16 @@
         android:textSize="36sp" />
 
     <Button
+        android:id="@+id/new_gameID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="151dp"
+        android:background="@android:drawable/button_onoff_indicator_on"
+        android:text="Start Game" />
+
+    <Button
         android:id="@+id/continueID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,16 +56,6 @@
         android:layout_marginBottom="153dp"
         android:background="@android:drawable/button_onoff_indicator_on"
         android:text="High Scores" />
-
-    <Button
-        android:id="@+id/new_gameID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="151dp"
-        android:background="@android:drawable/button_onoff_indicator_on"
-        android:text="Start Game" />
 
     <Button
         android:id="@+id/quitID"
