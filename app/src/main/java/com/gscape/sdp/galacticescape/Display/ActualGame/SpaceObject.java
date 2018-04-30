@@ -39,6 +39,6 @@ public class SpaceObject {
 
     public void setScreenLocation (Vector screenLocation) {
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)imageView.getLayoutParams();
-        layoutParams.leftMargin = 
+
     }
 }
