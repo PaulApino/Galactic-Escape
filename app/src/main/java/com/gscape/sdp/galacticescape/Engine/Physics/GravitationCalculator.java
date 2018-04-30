@@ -33,8 +33,8 @@ public class GravitationCalculator {
             for (int i = tempIndex; i <  objects.length; i++) {
                 double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
                 double force = gravityConstant * (currentObject.getMass() * objects[i].getMass()) / (distance * distance);     //force experienced by the two PhysicsObject
-                currentObject.setAcceleration(currentObject.getAcceleration().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
-                objects[i].setAcceleration(objects[i].getAcceleration().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
+                currentObject.setAcceleration(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass()));       //adds the acceleration to currentObject
+                objects[i].setAcceleration(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass()));      //adds the acceleration to other object
             }
             tempIndex++;
         }
