@@ -37,8 +37,19 @@ public class SpaceObject {
         imageView.setLayoutParams(layoutParams);
     }
 
+    public PhysicsObject getPhysicsObject() {
+        return physicsObject;
+    }
+
+    public ImageView getSpaceView() {
+        return imageView;
+    }
+
     public void setScreenLocation (Vector screenLocation) {
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)imageView.getLayoutParams();
-
+        Vector deltaVector = physicsObject.getLocation().minus(screenLocation);
+        layoutParams.leftMargin = (int)Math.round(deltaVector.getX() - physicsObject.getCollisionRadius());
+        layoutParams.bottomMargin = (int)Math.round(deltaVector.getY() - physicsObject.getCollisionRadius());
+        imageView.setLayoutParams(layoutParams);
     }
 }
