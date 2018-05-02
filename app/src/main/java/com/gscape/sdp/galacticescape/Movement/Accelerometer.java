@@ -1,4 +1,5 @@
 package com.gscape.sdp.galacticescape.Movement;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,19 +10,17 @@ import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 import com.gscape.sdp.galacticescape.R;
 
 
-public class Accelerometer extends AppCompatActivity implements SensorEventListener {
+public class Accelerometer implements SensorEventListener {
 
     private double x, y, z; //3D vector values
     private Sensor sensor; //accelerometer sensor
     private SensorManager sensorManager; //sensor manager to register the sensor
+    private Context context;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fullscreen);
-
+public Accelerometer()
+{
         //Initialise the Sensor Manager
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
         //Initialise the Accelerometer Sensor
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
