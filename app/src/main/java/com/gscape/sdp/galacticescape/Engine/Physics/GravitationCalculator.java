@@ -30,35 +30,45 @@ public class GravitationCalculator {
         //Calculates gravity effect for each PhysicsObject
         int tempIndex = 1;
         for (PhysicsObject currentObject : objects) {
-            for (int i = tempIndex; i <  objects.length; i++) {
-                double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
-                double force = gravityConstant * (currentObject.getMass() * objects[i].getMass()) / (distance * distance);     //force experienced by the two PhysicsObject
-                currentObject.setVelocity(currentObject.getVelocity().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
-                objects[i].setVelocity(objects[i].getVelocity().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
+            synchronized (currentObject) {
+                for (int i = tempIndex; i < objects.length; i++) {
+                    synchronized (objects[i]) {
+                        double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
+                        double force = gravityConstant * (currentObject.getMass() * objects[i].getMass()) / (distance * distance);     //force experienced by the two PhysicsObject
+                        currentObject.setVelocity(currentObject.getVelocity().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
+                        objects[i].setVelocity(objects[i].getVelocity().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
+                    }
+                }
+                tempIndex++;
             }
-            tempIndex++;
         }
     }
 
     public void update (PhysicsObject [] objects) {
         for (PhysicsObject currentObject : objects) {
-            currentObject.setLocation(currentObject.getLocation().add(currentObject.getVelocity()));
+            synchronized (currentObject) {
+                currentObject.setLocation(currentObject.getLocation().add(currentObject.getVelocity()));
+            }
         }
 
-//        if (objects.length > 1) {
-//            int tempIndex = 1;
-//            for (PhysicsObject currentObject : objects) {
-//                for (int i = tempIndex; i < objects.length; i++) {
-//                    double collisionDistance = currentObject.getCollisionRadius() + objects[i].getCollisionRadius();
-//                    double objectDistance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();
-//                    double distanceDifference = objectDistance - collisionDistance;
-//                    if (distanceDifference < 5.0) {
-//                        currentObject.setCollided();
-//                        objects[i].setCollided();
-//                    }
-//                }
-//                tempIndex++;
-//            }
-//        }
+        if (objects.length > 1) {
+            int tempIndex = 1;
+            for (PhysicsObject currentObject : objects) {
+                for (int i = tempIndex; i < objects.length; i++) {
+                    double collisionDistance = currentObject.getCollisionRadius() + objects[i].getCollisionRadius();
+                    double objectDistance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();
+                    double distanceDifference = objectDistance - collisionDistance;
+                    if (distanceDifference < 5.0) {
+                        synchronized (currentObject) {
+                            currentObject.setCollided();
+                        }
+                        synchronized (objects[i]) {
+                            objects[i].setCollided();
+                        }
+                    }
+                }
+                tempIndex++;
+            }
+        }
     }
 }

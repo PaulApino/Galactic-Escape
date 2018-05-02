@@ -1,6 +1,5 @@
-package com.gscape.sdp.galacticescape.Display.ActualGame;
+package com.gscape.sdp.galacticescape.Display.Testing;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 
+import com.gscape.sdp.galacticescape.Display.ActualGame.SpaceObject;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.GravitationCalculator;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class GamePlayDisplay extends AppCompatActivity {
+public class GamePlayDisplayTest extends AppCompatActivity {
 
     private RelativeLayout contentDisplay;
     private ArrayList<SpaceObject> spaceObjects;
