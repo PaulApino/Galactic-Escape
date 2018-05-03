@@ -5,6 +5,13 @@ import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 import java.util.Random;
 
 public class BlackHole extends Obstacle{
+
+
+   private Random r = new Random();
+   double massMin;
+   double massMax;
+   double collisionRadiusMin;
+   double collisionRadiusMax;
     /**
      * Makes a BlackHole from the given values.
      *
@@ -15,15 +22,12 @@ public class BlackHole extends Obstacle{
      * @param acceleration    the acceleration of the object.
      */
 
-   private Random r = new Random();
-   double collisionRadiusMin;
-   double collisionRadiusMax;
-
     public BlackHole(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
         super(mass, collisionRadius, location, velocity, acceleration);
         collisionRadiusMin = 400;
         collisionRadiusMax = 450;
-        collisionRadius = collisionRadiusMin + (collisionRadiusMax - collisionRadiusMin) * r.nextDouble();
+        this.collisionRadius = collisionRadiusMin + (collisionRadiusMax - collisionRadiusMin) * r.nextDouble();
+
 
     }
 }

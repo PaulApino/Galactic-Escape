@@ -14,8 +14,9 @@ public class Obstacle extends PhysicsObject {
      * @param velocity        the velocity of the object.
      * @param acceleration    the acceleration of the object.
      */
-    public Obstacle(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
+    protected Obstacle(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
         super(mass, collisionRadius, location, velocity, acceleration);
     }
+
 
 }
