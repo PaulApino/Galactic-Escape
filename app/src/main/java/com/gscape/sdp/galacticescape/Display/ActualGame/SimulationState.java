@@ -142,7 +142,11 @@ public class SimulationState {
 
     public boolean isSafeDisplay() {
         synchronized (this) {
-            if (())
+            if ((!isBackgroundAdding() | !isBackgroundDeleting())
+                    && (!isDisplayAdding() | !isBackgroundDeleting())) {
+                setDisplayRunning();
+                return true;
+            } else return false;
         }
     }
 }

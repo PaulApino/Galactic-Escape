@@ -88,15 +88,35 @@ public class Vector {
      */
     public Vector projectWith (double magnitude) {
         if (x == 0 && y == 0 && z == 0) throw new IllegalArgumentException("Vector doesn't have direction.");
-        double mag = getMagnitude();
-        Vector unitVector = new Vector(x / mag, y / mag, z / mag);
+        Vector unitVector = unitVector();
         return new Vector(unitVector.x * magnitude, unitVector.y * magnitude, unitVector.z * magnitude);
+    }
+
+    public Vector unitVector () {
+        double mag = getMagnitude();
+        return new Vector(x / mag, y / mag, z / mag);
     }
 
     public Vector transformRotate (double angleFromYAntiClock) {
         double sinAngle = Math.sin(angleFromYAntiClock);
         double cosAngle = Math.cos(angleFromYAntiClock);
         return new Vector((x * cosAngle) - (y * sinAngle), (x * sinAngle) + (y * cosAngle), 0);
+    }
+
+    public double angleFromYOrigintoYPointAntiClock () {
+        if (y > 0) {
+            if (x > 0) {
+                return 360 - Math.tan(x / y);
+            } else if (x < 0) {
+                return Math.tan(x / y);
+            } else return 0;
+        } else if (y < 0) {
+            if (x > 0) {
+                return 180 + Math.tan(x / y);
+            } else if (x < 0) {
+                return 180 - Math.tan(x / y);
+            } else return 180;
+        } else return 0;
     }
 
     @Override

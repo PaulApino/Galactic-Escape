@@ -1,7 +1,5 @@
 package com.gscape.sdp.galacticescape.Engine.Physics;
 
-import android.content.Context;
-
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 
 /**
@@ -32,17 +30,17 @@ public class GravitationCalculator {
         //Calculates gravity effect for each PhysicsObject
         int tempIndex = 1;
         for (PhysicsObject currentObject : objects) {
-            synchronized (currentObject) {
-                for (int i = tempIndex; i < objects.length; i++) {
-                    synchronized (objects[i]) {
-                        double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
-                        double force = gravityConstant * (currentObject.getMass() * objects[i].getMass()) / (distance * distance);     //force experienced by the two PhysicsObject
-                        currentObject.setVelocity(currentObject.getVelocity().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
-                        objects[i].setVelocity(objects[i].getVelocity().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
-                    }
+            for (int i = tempIndex; i < objects.length; i++) {
+                double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
+                double force = gravityConstant * (currentObject.getMass() * objects[i].getMass()) / (distance * distance);     //force experienced by the two PhysicsObject
+                synchronized (currentObject) {
+                    currentObject.setVelocity(currentObject.getVelocity().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
                 }
-                tempIndex++;
+                synchronized (objects[i]) {
+                    objects[i].setVelocity(objects[i].getVelocity().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
+                }
             }
+            tempIndex++;
         }
     }
 
