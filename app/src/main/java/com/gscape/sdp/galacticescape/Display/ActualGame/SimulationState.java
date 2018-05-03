@@ -42,8 +42,12 @@ public class SimulationState {
         return backgroundState == SimulationStateEnum.SIMULATION_BACKGROUND_FINISHED;
     }
 
-    public boolean isBackgroundStoppped() {
+    public boolean isBackgroundStopped() {
         return backgroundState == SimulationStateEnum.SIMULATION_BACKGROUND_STOPPED;
+    }
+
+    public boolean isBackgroundAdding() {
+        return backgroundState == SimulationStateEnum.SIMULATION_BACKGROUND_ADDING;
     }
 
     public boolean isBackgroundDeleting() {
@@ -62,11 +66,83 @@ public class SimulationState {
         return displayState == SimulationStateEnum.SIMULATION_DISPLAY_STOPPED;
     }
 
+    public boolean isDisplayAdding() {
+        return displayState == SimulationStateEnum.SIMULATION_DISPLAY_ADDING;
+    }
+
     public boolean isDisplayDeleting() {
         return displayState == SimulationStateEnum.SIMULATION_DISPLAY_DELETING;
     }
 
+    public void setRunning() {
+        generalState = SimulationStateEnum.SIMULATION_RUNNING;
+    }
+
+    public void setPaused() {
+        generalState = SimulationStateEnum.SIMULATION_PAUSED;
+    }
+
+    public void setResumed() {
+        generalState = SimulationStateEnum.SIMULATION_RESUMED;
+    }
+
+    public void setStopped() {
+        generalState = SimulationStateEnum.SIMULATION_STOPPED;
+    }
+
+    public void setBackgroundRunning() {
+        backgroundState = SimulationStateEnum.SIMULATION_BACKGROUND_RUNNING;
+    }
+
+    public void setBackgroundFinished() {
+        backgroundState = SimulationStateEnum.SIMULATION_BACKGROUND_FINISHED;
+    }
+
+    public void setBackgroundStopped() {
+        backgroundState = SimulationStateEnum.SIMULATION_BACKGROUND_STOPPED;
+    }
+
+    public void setBackgroundAdding() {
+        backgroundState = SimulationStateEnum.SIMULATION_BACKGROUND_ADDING;
+    }
+
+    public void setBackgroundDeleting() {
+        backgroundState = SimulationStateEnum.SIMULATION_BACKGROUND_DELETING;
+    }
+
+    public void setDisplayRunning() {
+        displayState = SimulationStateEnum.SIMULATION_DISPLAY_RUNNING;
+    }
+
+    public void setDisplayFinished() {
+        displayState = SimulationStateEnum.SIMULATION_DISPLAY_FINISHED;
+    }
+
+    public void setDisplayStopped() {
+        displayState = SimulationStateEnum.SIMULATION_DISPLAY_STOPPED;
+    }
+
+    public void setDisplayAdding() {
+        displayState = SimulationStateEnum.SIMULATION_DISPLAY_ADDING;
+    }
+
+    public void setDisplayDeleting() {
+        displayState = SimulationStateEnum.SIMULATION_DISPLAY_DELETING;
+    }
+
+    public boolean isSafeBackgroundSimulate() {
+        synchronized (this) {
+            if ((isBackgroundFinished() | isBackgroundStopped())
+                    && (isDisplayFinished() | isDisplayStopped())) {
+                setBackgroundRunning();
+                return true;
+            } else return false;
+        }
+    }
+
     public boolean isSafeDisplay() {
-        return
+        synchronized (this) {
+            if (())
+        }
     }
 }

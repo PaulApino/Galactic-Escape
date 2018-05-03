@@ -1,6 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.gscape.sdp.galacticescape.Engine.Physics.SimulationStateEnum;
@@ -31,16 +32,31 @@ public class SimulationViewRunnable implements Runnable {
 
         ArrayList<SpaceObject> spaceObjects = contents.getSpaceObjects();
 
-        if (simulationState.isSafeDisplay()) {
-            for (SpaceObject currentObject : spaceObjects) {
-                currentObject.setScreenLocation(contents.getScreenLocation());
-                container.addView(currentObject.getSpaceView());
-            }
+        for (SpaceObject currentObject : spaceObjects) {
+            currentObject.setScreenLocation(contents.getScreenLocation());
+            container.addView(currentObject.getSpaceView());
         }
+        container.invalidate();
     }
 
     @Override
     public void run() {
-
+        try {
+            while (simulationState.isRunning() | simulationState.isResumed()) {
+                if (simulationState.isSafeDisplay()) {
+                    simulationState.setDisplayRunning();
+                    ArrayList<SpaceObject> spaceObjects = contents.getSpaceObjects();
+                    for (SpaceObject currentObject : spaceObjects) {
+                        currentObject.setScreenLocation(contents.getScreenLocation());
+                    }
+                    simulationState.setDisplayFinished();
+                    notifyAll();
+                    container.invalidate();
+                    Thread.sleep(20);
+                }
+            }
+        } catch (InterruptedException e) {
+            Log.e("DisplayRefresher", e.getMessage());
+        }
     }
 }
