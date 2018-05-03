@@ -47,7 +47,10 @@ public class SpaceObject {
 
     public void setScreenLocation (Vector screenLocation) {
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)imageView.getLayoutParams();
-        Vector deltaVector = physicsObject.getLocation().minus(screenLocation);
+        Vector deltaVector;
+        synchronized (physicsObject) {
+            deltaVector = physicsObject.getLocation().minus(screenLocation);
+        }
         layoutParams.leftMargin = (int)Math.round(deltaVector.getX() - physicsObject.getCollisionRadius());
         layoutParams.bottomMargin = (int)Math.round(deltaVector.getY() - physicsObject.getCollisionRadius());
         imageView.setLayoutParams(layoutParams);

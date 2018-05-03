@@ -38,6 +38,10 @@ public class Vector {
         return new Vector(x, y, z);
     }
 
+    public static Vector make2DPolar(double magnitude, double angleFromX) {
+        return new Vector(magnitude * Math.cos(angleFromX), magnitude * Math.sin(angleFromX), 0);
+    }
+
     public double getX() {
         return x;
     }
@@ -87,6 +91,12 @@ public class Vector {
         double mag = getMagnitude();
         Vector unitVector = new Vector(x / mag, y / mag, z / mag);
         return new Vector(unitVector.x * magnitude, unitVector.y * magnitude, unitVector.z * magnitude);
+    }
+
+    public Vector transformRotate (double angleFromYAntiClock) {
+        double sinAngle = Math.sin(angleFromYAntiClock);
+        double cosAngle = Math.cos(angleFromYAntiClock);
+        return new Vector((x * cosAngle) - (y * sinAngle), (x * sinAngle) + (y * cosAngle), 0);
     }
 
     @Override
