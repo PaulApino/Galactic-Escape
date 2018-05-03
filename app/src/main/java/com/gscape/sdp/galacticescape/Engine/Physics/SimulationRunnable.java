@@ -24,6 +24,7 @@ public class SimulationRunnable implements Runnable {
     public void run() {
         try {
             while (simulationState.isRunning() || simulationState.isResumed()) {
+                Log.i("BackgroundSimulation", "StartRun");
                 if (simulationState.isSafeBackgroundSimulate()) {
 
                     PhysicsObject[] arrObjects = new PhysicsObject[simulationContents.size()];
@@ -35,13 +36,12 @@ public class SimulationRunnable implements Runnable {
                     calculator.update(arrObjects);
 
                     simulationState.setBackgroundFinished();
-                    notifyAll();
 
-                    Thread.sleep(50);
-                }
+                    Thread.sleep(200);
+                } else Log.i("BackgroundSimulation", "FailedRun");
             }
         } catch (InterruptedException e) {
-            Log.e("BackgroundSimulation", e.getMessage());
+            Log.i("BackgroundSimulation", e.getMessage());
         }
     }
 }

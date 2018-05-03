@@ -1,5 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
+import android.util.Log;
+
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public class SimulationContents {
         screenLocation = Vector.make2D(
                 player.getPhysicsObject().getLocation().getX() - screenSize.getX(),
                 player.getPhysicsObject().getLocation().getY() - screenSize.getY());
+
+        Log.i("ScreenLocation", screenLocation.getX() + ", " + screenLocation.getY());
 
         for (int i = 1; i < spaceObjects.size(); i++) {
             spaceObjects.get(i).setScreenLocation(screenLocation);
