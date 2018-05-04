@@ -1,6 +1,8 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.support.constraint.ConstraintLayout;
@@ -8,9 +10,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
@@ -55,64 +60,81 @@ public class GamePlayScreen extends AppCompatActivity {
 
         init();
 
-//        HandlerThread simHandlerThread = new HandlerThread("TestDisplay");
-//        simHandlerThread.start();
-
         Thread backSim = new Thread(simulator);
-        backSim.start();
+        Thread frontSim = new Thread(simulationDisplayer);
 
-        Handler simHandler = new Handler();
-        simHandler.postDelayed(simulationDisplayer, 500);
+        backSim.start();
+        frontSim.start();
     }
 
     private void init() {
         Random rand = new Random();
-        ArrayList<SpaceObject> spaceObjects = new ArrayList<>(6);
+        ArrayList<PhysicsObject> physicsObjects = new ArrayList<>(10);
+        ArrayList<ImageView> imageObjects = new ArrayList<>(10);
 
-        spaceObjects.add(new SpaceObject(getApplicationContext(),
-                new PhysicsObject(
-                        200,
+        physicsObjects.add(new PhysicsObject(
+                        10,
                         75,
                         Vector.make2D(0, 0),
                         Vector.make2D(0, 0),
-                        Vector.make2D(0, 0))));
+                        Vector.make2D(0, 0)));
 
-        for (int i = 1; i < 5; i++) {
-            spaceObjects.add(new SpaceObject(getApplicationContext(),
-                    new PhysicsObject(
-                            rand.nextInt(4500) + 500,
-                            rand.nextInt(175) + 25,
-                            Vector.make2D(rand.nextInt(100) - 100, rand.nextInt(100) - 100),
-                            Vector.make2D(0, 0),
-                            Vector.make2D(0, 0))));
+
+        for (int i = 1; i < 20; i++) {
+            double mass = rand.nextInt(39000) + 1000;
+            physicsObjects.add(new PhysicsObject(
+                            mass,
+                            mass / 40000 * 170,
+                            Vector.make2D(rand.nextInt(1100) + 300, rand.nextInt(1100) + 500),
+                            Vector.make2D(-0.2, -0.2),
+                            Vector.make2D(0, 0)));
         }
 
-        final ViewTreeObserver observer = simulationDisplay.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (contentDisplayHeight == 0 || contentDisplayWidth == 0) {
-                    contentDisplayHeight = simulationDisplay.getHeight();
-                    contentDisplayWidth = simulationDisplay.getWidth();
-                } else simulationDisplay.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        contentDisplayHeight = displayMetrics.heightPixels;
+        contentDisplayWidth = displayMetrics.widthPixels;
 
-        simulationContents = new SimulationContents(spaceObjects, Vector.make2D(contentDisplayWidth, contentDisplayHeight));
-        simulationContents.getPlayer().setScreenLocation(Vector.make2D());
-        simulationContents.updateLocations();
+        Log.i("Display", contentDisplayHeight + ", " + contentDisplayWidth);
 
-        for (SpaceObject currentObject : simulationContents.getSpaceObjects()) {
-            simulationDisplay.addView(currentObject.getSpaceView());
+        for (PhysicsObject currentObject : physicsObjects) {
+            int physicsObjectDiameter = (int) currentObject.getCollisionRadius() * 2;
+
+            Bitmap mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.temp_space_object);
+            Bitmap mResizedBitmap = Bitmap.createScaledBitmap(mBitmap, physicsObjectDiameter, physicsObjectDiameter, true);
+
+            ImageView imageView = new ImageView(getApplicationContext());
+            imageView.setImageBitmap(mResizedBitmap);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_START);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            layoutParams.topMargin = Integer.MIN_VALUE;
+            layoutParams.bottomMargin = Integer.MIN_VALUE;
+            layoutParams.leftMargin = Integer.MIN_VALUE;
+            layoutParams.rightMargin = Integer.MIN_VALUE;
+            imageView.setLayoutParams(layoutParams);
+
+            imageObjects.add(imageView);
         }
+
+        ImageView player = imageObjects.get(0);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        player.setLayoutParams(layoutParams);
+
+        for (ImageView anImage : imageObjects) {
+            simulationDisplay.addView(anImage);
+        }
+
+        simulationContents = new SimulationContents(physicsObjects, imageObjects);
 
         simulationState = new SimulationState();
-
-        GravitationCalculator calculator = new GravitationCalculator(0.006987);
-
-        simulator = new SimulationRunnable(simulationContents.getSpaceObjects(), calculator, simulationState);
-        simulationDisplayer = new SimulationDisplayRunnable(simulationDisplay, simulationContents, simulationState);
-
         simulationState.setRunning();
+
+        GravitationCalculator calculator = new GravitationCalculator(0.0064543);
+
+        simulator = new SimulationRunnable(simulationContents, calculator, simulationState);
+        simulationDisplayer = new SimulationDisplayRunnable(simulationDisplay, Vector.make2D(contentDisplayWidth, contentDisplayHeight), simulationContents, simulationState);
     }
 }
