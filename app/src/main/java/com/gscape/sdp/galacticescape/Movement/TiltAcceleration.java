@@ -24,7 +24,7 @@ public class TiltAcceleration {
         } else if (xIntensity <= -3) {
             xIntensity = -1;
         } else xIntensity = 1;
-        
+
         if (yIntensity > -3 && yIntensity < 3) {
             yIntensity = yIntensity / 3;
         } else if (yIntensity <= -3) {

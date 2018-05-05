@@ -100,8 +100,6 @@ public class GamePlayScreen extends AppCompatActivity {
         contentDisplayHeight = displayMetrics.heightPixels;
         contentDisplayWidth = displayMetrics.widthPixels;
 
-        Log.i("Display", contentDisplayHeight + ", " + contentDisplayWidth);
-
         for (PhysicsObject currentObject : physicsObjects) {
             int physicsObjectDiameter = (int) currentObject.getCollisionRadius() * 2;
 
