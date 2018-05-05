@@ -5,7 +5,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
-import com.gscape.sdp.galacticescape.Engine.Physics.SimulationStateEnum;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
 import java.util.ArrayList;
@@ -51,22 +50,13 @@ public class SimulationDisplayRunnable implements Runnable {
                             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)currentImgObject.getLayoutParams();
                             layoutParams.leftMargin = (int)(deltaV.getX() - imageOffset);
                             layoutParams.bottomMargin = (int)(deltaV.getY() - imageOffset);
-                            imageParameters.add(layoutParams);
+                            container.post(new LayoutParameterUpdate(currentImgObject, layoutParams));
                         }
                     }
 
                     simulationState.setDisplayFinished();
 
-                    container.post(new LayoutParameterUpdate(imageObjects, imageParameters));
-
-                    container.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            container.invalidate();
-                        }
-                    });
-
-                    Thread.sleep(10);
+                    Thread.sleep(15);
                 }
             }
         } catch (InterruptedException e) {
@@ -76,19 +66,18 @@ public class SimulationDisplayRunnable implements Runnable {
 
     private class LayoutParameterUpdate implements Runnable {
 
-        private final ArrayList<ImageView> images;
-        private final ArrayList<RelativeLayout.LayoutParams> layoutParams;
+        private final ImageView images;
+        private final RelativeLayout.LayoutParams layoutParams;
 
-        public LayoutParameterUpdate(ArrayList<ImageView> images, ArrayList<RelativeLayout.LayoutParams> layoutParams) {
+        public LayoutParameterUpdate(ImageView images, RelativeLayout.LayoutParams layoutParams) {
             this.images = images;
             this.layoutParams = layoutParams;
         }
 
         @Override
         public void run() {
-            for (int i = 1; i < images.size(); i++) {
-                images.get(i).setLayoutParams(layoutParams.get(i - 1));
-            }
+            images.setLayoutParams(layoutParams);
+            container.invalidate();
         }
     }
 }

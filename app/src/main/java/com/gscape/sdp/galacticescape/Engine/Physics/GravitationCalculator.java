@@ -1,5 +1,7 @@
 package com.gscape.sdp.galacticescape.Engine.Physics;
 
+import android.util.Log;
+
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 
 /**

@@ -22,6 +22,9 @@ import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.GravitationCalculator;
 import com.gscape.sdp.galacticescape.Engine.Physics.SimulationRunnable;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
+import com.gscape.sdp.galacticescape.Movement.Accelerometer;
+import com.gscape.sdp.galacticescape.Movement.TiltAcceleration;
+import com.gscape.sdp.galacticescape.Movement.TiltMovementRunnable;
 import com.gscape.sdp.galacticescape.R;
 
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class GamePlayScreen extends AppCompatActivity {
     private SimulationState simulationState;
     private SimulationDisplayRunnable simulationDisplayer;
     private SimulationRunnable simulator;
+    private TiltMovementRunnable tiltMovement;
 
     private SimulationContents simulationContents;
 
@@ -62,9 +66,11 @@ public class GamePlayScreen extends AppCompatActivity {
 
         Thread backSim = new Thread(simulator);
         Thread frontSim = new Thread(simulationDisplayer);
+        Thread tiltSimulation = new Thread(tiltMovement);
 
         backSim.start();
         frontSim.start();
+        tiltSimulation.start();
     }
 
     private void init() {
@@ -72,23 +78,22 @@ public class GamePlayScreen extends AppCompatActivity {
         ArrayList<PhysicsObject> physicsObjects = new ArrayList<>(10);
         ArrayList<ImageView> imageObjects = new ArrayList<>(10);
 
-        physicsObjects.add(new PhysicsObject(
-                        10,
-                        75,
-                        Vector.make2D(0, 0),
-                        Vector.make2D(0, 0),
-                        Vector.make2D(0, 0)));
+        PhysicsObject physA = new PhysicsObject(158845.97, 90.378,
+                Vector.make2D(960, 500),
+                Vector.make2D( 0, 0),
+                Vector.make2D(0, 0));
+        PhysicsObject physB = new PhysicsObject(1539.47, 50.378,
+                Vector.make2D(500, 840),
+                Vector.make2D(1.2, 0.2),
+                Vector.make2D(0, 0));
+        PhysicsObject physC = new PhysicsObject(1530.35, 60.973,
+                Vector.make2D(1100, 340),
+                Vector.make2D(-1.45, -0.7),
+                Vector.make2D(0, 0));
 
-
-        for (int i = 1; i < 20; i++) {
-            double mass = rand.nextInt(39000) + 1000;
-            physicsObjects.add(new PhysicsObject(
-                            mass,
-                            mass / 40000 * 170,
-                            Vector.make2D(rand.nextInt(1100) + 300, rand.nextInt(1100) + 500),
-                            Vector.make2D(-0.2, -0.2),
-                            Vector.make2D(0, 0)));
-        }
+        physicsObjects.add(physC);
+        physicsObjects.add(physA);
+        physicsObjects.add(physB);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -132,9 +137,11 @@ public class GamePlayScreen extends AppCompatActivity {
         simulationState = new SimulationState();
         simulationState.setRunning();
 
-        GravitationCalculator calculator = new GravitationCalculator(0.0064543);
+        GravitationCalculator calculator = new GravitationCalculator(0.0067139);
 
         simulator = new SimulationRunnable(simulationContents, calculator, simulationState);
         simulationDisplayer = new SimulationDisplayRunnable(simulationDisplay, Vector.make2D(contentDisplayWidth, contentDisplayHeight), simulationContents, simulationState);
+
+        tiltMovement = new TiltMovementRunnable(new TiltAcceleration(physC, new Accelerometer(getApplicationContext())), physC, simulationState);
     }
 }
