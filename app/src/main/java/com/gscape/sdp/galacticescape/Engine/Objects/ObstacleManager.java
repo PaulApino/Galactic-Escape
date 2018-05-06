@@ -14,6 +14,11 @@ public class ObstacleManager {
     private double angleMin;
     private Random r;
     private ArrayList obstaclesList;
+    double massMin;
+    double massMax;
+    double collisionRadiusMin;
+    double collisionRadiusMax;
+    double collisionRadius;
 
     public ObstacleManager()
     {
@@ -23,6 +28,9 @@ public class ObstacleManager {
         angleMax = 180;//Unit is in degrees
         angleMin = 0;
         r = new Random();
+        collisionRadiusMin = 400;
+        collisionRadiusMax = 450;
+        collisionRadius = collisionRadiusMin + (collisionRadiusMax - collisionRadiusMin) * r.nextDouble();
     }
 
     private Vector randLoc()

@@ -6,12 +6,6 @@ import java.util.Random;
 
 public class BlackHole extends Obstacle{
 
-
-   private Random r = new Random();
-   double massMin;
-   double massMax;
-   double collisionRadiusMin;
-   double collisionRadiusMax;
     /**
      * Makes a BlackHole from the given values.
      *
@@ -24,10 +18,5 @@ public class BlackHole extends Obstacle{
 
     public BlackHole(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
         super(mass, collisionRadius, location, velocity, acceleration);
-        collisionRadiusMin = 400;
-        collisionRadiusMax = 450;
-        this.collisionRadius = collisionRadiusMin + (collisionRadiusMax - collisionRadiusMin) * r.nextDouble();
-
-
     }
 }
