@@ -9,12 +9,11 @@ package com.gscape.sdp.galacticescape.Engine.Physics;
  */
 public class Vector {
 
-    private final double x, y, z;
+    private double x, y;
 
-    private Vector(double x, double y, double z) {
+    private Vector(double x, double y) {
         this.x = x;
         this.y = y;
-        this.z = z;
     }
 
     /**
@@ -24,34 +23,23 @@ public class Vector {
      * @return returns a 2 dimensional vector object.
      */
     public static Vector make2D(double x, double y) {
-        return new Vector(x, y, 0);
-    }
-
-    /**
-     * Makes a 3 dimensional vector.
-     * @param x x coordinate.
-     * @param y y coordinate.
-     * @param z z coordinate.
-     * @return returns a 3 dimensional vector object.
-     */
-    public static Vector make3D(double x, double y, double z) {
-        return new Vector(x, y, z);
+        return new Vector(x, y);
     }
 
     public static Vector make2DPolar(double magnitude, double angleFromX) {
-        return new Vector(magnitude * Math.cos(angleFromX), magnitude * Math.sin(angleFromX), 0);
+        return new Vector(magnitude * Math.cos(angleFromX), magnitude * Math.sin(angleFromX));
     }
 
     public double getX() {
-        return x;
+        synchronized (this) {
+            return x;
+        }
     }
 
     public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
+        synchronized (this) {
+            return y;
+        }
     }
 
     /**
@@ -59,7 +47,9 @@ public class Vector {
      * @return returns the magnitude of the vector.
      */
     public double getMagnitude() {
-        return Math.sqrt((x * x) + (y * y) + (z * z));
+        synchronized (this) {
+            return Math.sqrt((x * x) + (y * y));
+        }
     }
 
     /**
@@ -68,7 +58,9 @@ public class Vector {
      * @return returns the sum of this and aVector as a Vector.
      */
     public Vector add (Vector aVector) {
-        return new Vector(x + aVector.x, y + aVector.y, z + aVector.z);
+        synchronized (this) {
+            return new Vector(x + aVector.x, y + aVector.y);
+        }
     }
 
     /**
@@ -77,7 +69,9 @@ public class Vector {
      * @return returns the difference of this - aVector as a Vector.
      */
     public Vector minus (Vector aVector) {
-        return new Vector(x - aVector.x, y - aVector.y, z - aVector.z);
+        synchronized (this) {
+            return new Vector(x - aVector.x, y - aVector.y);
+        }
     }
 
     /**
@@ -87,20 +81,27 @@ public class Vector {
      * @throws IllegalArgumentException throws if this vector magnitude is 0.
      */
     public Vector projectWith (double magnitude) {
-        if (x == 0 && y == 0 && z == 0) throw new IllegalArgumentException("Vector doesn't have direction.");
-        Vector unitVector = unitVector();
-        return new Vector(unitVector.x * magnitude, unitVector.y * magnitude, unitVector.z * magnitude);
+        synchronized (this) {
+            if (x == 0 && y == 0)
+                throw new IllegalArgumentException("Vector doesn't have direction.");
+            Vector unitVector = unitVector();
+            return new Vector(unitVector.x * magnitude, unitVector.y * magnitude);
+        }
     }
 
     public Vector unitVector () {
-        double mag = getMagnitude();
-        return new Vector(x / mag, y / mag, z / mag);
+        synchronized (this) {
+            double mag = getMagnitude();
+            return new Vector(x / mag, y / mag);
+        }
     }
 
     public Vector transformRotate (double angleFromYAntiClock) {
-        double sinAngle = Math.sin(angleFromYAntiClock);
-        double cosAngle = Math.cos(angleFromYAntiClock);
-        return new Vector((x * cosAngle) - (y * sinAngle), (x * sinAngle) + (y * cosAngle), 0);
+        synchronized (this) {
+            double sinAngle = Math.sin(angleFromYAntiClock);
+            double cosAngle = Math.cos(angleFromYAntiClock);
+            return new Vector((x * cosAngle) - (y * sinAngle), (x * sinAngle) + (y * cosAngle));
+        }
     }
 
     public double angleFromYOrigintoYPointAntiClock () {
@@ -123,7 +124,7 @@ public class Vector {
     public boolean equals(Object obj) {
         if (obj instanceof Vector) {
             Vector aVector = (Vector)obj;
-            return (x == aVector.x && y == aVector.y && z == aVector.z);
+            return (x == aVector.x && y == aVector.y);
         } return false;
     }
 }

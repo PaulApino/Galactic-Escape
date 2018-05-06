@@ -8,7 +8,6 @@ import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
  */
 public class PhysicsObject {
 
-
     protected final double mass, collisionRadius;
     protected Vector location, velocity, acceleration;
     protected boolean collided;

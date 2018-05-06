@@ -1,5 +1,7 @@
 package com.gscape.sdp.galacticescape.Engine.Physics;
 
+import android.util.Log;
+
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 
 /**
@@ -33,12 +35,8 @@ public class GravitationCalculator {
             for (int i = tempIndex; i < objects.length; i++) {
                 double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
                 double force = gravityConstant * (currentObject.getMass() * objects[i].getMass()) / (distance * distance);     //force experienced by the two PhysicsObject
-                synchronized (currentObject) {
-                    currentObject.setVelocity(currentObject.getVelocity().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
-                }
-                synchronized (objects[i]) {
-                    objects[i].setVelocity(objects[i].getVelocity().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
-                }
+                currentObject.setVelocity(currentObject.getVelocity().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
+                objects[i].setVelocity(objects[i].getVelocity().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
             }
             tempIndex++;
         }
@@ -46,9 +44,7 @@ public class GravitationCalculator {
 
     public void update (PhysicsObject [] objects) {
         for (PhysicsObject currentObject : objects) {
-            synchronized (currentObject) {
-                currentObject.setLocation(currentObject.getLocation().add(currentObject.getVelocity()));
-            }
+            currentObject.setLocation(currentObject.getLocation().add(currentObject.getVelocity()));
         }
 
         if (objects.length > 1) {
@@ -59,12 +55,8 @@ public class GravitationCalculator {
                     double objectDistance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();
                     double distanceDifference = objectDistance - collisionDistance;
                     if (distanceDifference < 5.0) {
-                        synchronized (currentObject) {
-                            currentObject.setCollided();
-                        }
-                        synchronized (objects[i]) {
-                            objects[i].setCollided();
-                        }
+                        currentObject.setCollided();
+                        objects[i].setCollided();
                     }
                 }
                 tempIndex++;

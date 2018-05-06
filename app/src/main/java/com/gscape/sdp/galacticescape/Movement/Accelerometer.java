@@ -12,13 +12,11 @@ import com.gscape.sdp.galacticescape.R;
 
 public class Accelerometer implements SensorEventListener {
 
-    private double x, y, z; //3D vector values
+    private double x, y; //3D vector values
     private Sensor sensor; //accelerometer sensor
     private SensorManager sensorManager; //sensor manager to register the sensor
-    private Context context;
 
-public Accelerometer()
-{
+    public Accelerometer(Context context) {
         //Initialise the Sensor Manager
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
@@ -32,7 +30,7 @@ public Accelerometer()
     //gets a new vector based on values provided by the sensor
     public Vector getVectorFromSensor()
     {
-       return Vector.make3D(x,y,z);
+       return Vector.make2D(y,-(x - 3));
     }
 
     /*
@@ -40,15 +38,12 @@ public Accelerometer()
      */
     @Override
     public void onSensorChanged(SensorEvent event) {
-
         x = event.values[0];
         y = event.values[1];
-        z = event.values[2];
-
     }
-/*
-Method of SensorEventListener interface. Is redundant and will not be implemented.
- */
+    /*
+    Method of SensorEventListener interface. Is redundant and will not be implemented.
+    */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         //Will not be used

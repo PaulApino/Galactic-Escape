@@ -18,5 +18,12 @@ public class BlackHole extends Obstacle{
 
     public BlackHole(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
         super(mass, collisionRadius, location, velocity, acceleration);
+//
+//        collisionRadiusMin = 400;
+//        collisionRadiusMax = 450;
+//        this.collisionRadius = collisionRadiusMin + (collisionRadiusMax - collisionRadiusMin) * r.nextDouble();
+
+
+
     }
 }

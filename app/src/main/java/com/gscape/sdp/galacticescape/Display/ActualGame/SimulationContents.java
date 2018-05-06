@@ -1,44 +1,30 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
-import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
+import android.widget.ImageView;
+
+import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 
 import java.util.ArrayList;
 
 /**
- * Handles changing object screen position.
+ * Container of Simulation objects, Handles adding and deleting simulation objects.
  * @author Paul Apino
  */
 public class SimulationContents {
 
-    private SpaceObject player;
-    private ArrayList<SpaceObject> spaceObjects;
-    private Vector screenSize, screenLocation;
+    private ArrayList<PhysicsObject> physicsObjects;
+    private ArrayList<ImageView> imageObjects;
 
-    public SimulationContents(ArrayList<SpaceObject> spaceObjects, Vector screenSize) {
-        this.player = spaceObjects.get(0);
-        this.spaceObjects = spaceObjects;
-        this.screenSize = screenSize;
+    public SimulationContents(ArrayList<PhysicsObject> physicsObjects, ArrayList<ImageView> imageObjects) {
+        this.physicsObjects = physicsObjects;
+        this.imageObjects = imageObjects;
     }
 
-    public SpaceObject getPlayer() {
-        return player;
+    public ArrayList<PhysicsObject> getPhysicsObjects() {
+        return physicsObjects;
     }
 
-    public ArrayList<SpaceObject> getSpaceObjects() {
-        return spaceObjects;
-    }
-
-    public Vector getScreenLocation() {
-        return screenLocation;
-    }
-
-    public void updateLocations() {
-        screenLocation = Vector.make2D(
-                player.getPhysicsObject().getLocation().getX() - screenSize.getX(),
-                player.getPhysicsObject().getLocation().getY() - screenSize.getY());
-
-        for (int i = 1; i < spaceObjects.size(); i++) {
-            spaceObjects.get(i).setScreenLocation(screenLocation);
-        }
+    public ArrayList<ImageView> getImageObjects() {
+        return imageObjects;
     }
 }
