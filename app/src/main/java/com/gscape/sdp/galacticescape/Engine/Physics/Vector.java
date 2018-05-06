@@ -9,7 +9,7 @@ package com.gscape.sdp.galacticescape.Engine.Physics;
  */
 public class Vector {
 
-    private final double x, y;
+    private double x, y;
 
     private Vector(double x, double y) {
         this.x = x;
@@ -31,11 +31,15 @@ public class Vector {
     }
 
     public double getX() {
-        return x;
+        synchronized (this) {
+            return x;
+        }
     }
 
     public double getY() {
-        return y;
+        synchronized (this) {
+            return y;
+        }
     }
 
     /**

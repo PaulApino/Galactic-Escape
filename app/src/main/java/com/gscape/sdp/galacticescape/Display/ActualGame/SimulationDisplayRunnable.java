@@ -12,13 +12,13 @@ import java.util.ArrayList;
 public class SimulationDisplayRunnable implements Runnable {
 
     private final RelativeLayout container;
-    private final Vector screenSize;
+    private final ScreenValues screenValues;
     private final SimulationContents contents;
     private final SimulationState simulationState;
 
-    public SimulationDisplayRunnable(RelativeLayout container, Vector screenSize, SimulationContents contents, SimulationState simulationState) {
+    public SimulationDisplayRunnable(RelativeLayout container, ScreenValues screenValues, SimulationContents contents, SimulationState simulationState) {
         this.container = container;
-        this.screenSize = screenSize;
+        this.screenValues = screenValues;
         this.contents = contents;
         this.simulationState = simulationState;
     }
@@ -36,16 +36,16 @@ public class SimulationDisplayRunnable implements Runnable {
                         ArrayList<PhysicsObject> physicsObjects = contents.getPhysicsObjects();
 
                         PhysicsObject player = physicsObjects.get(0);
-                        Vector screenLocation = Vector.make2D(
-                                player.getLocation().getX() - (screenSize.getX() / 2),
-                                player.getLocation().getY() - (screenSize.getY() / 2));
+                        screenValues.setScreenLocation(Vector.make2D(
+                                player.getLocation().getX() - (screenValues.getScreenSize().getX() / 2),
+                                player.getLocation().getY() - (screenValues.getScreenSize().getY() / 2)));
 
                         for (int i = 1; i < imageObjects.size(); i++) {
                             Vector currentPhysObjectLocation = physicsObjects.get(i).getLocation();
                             double imageOffset = physicsObjects.get(i).getCollisionRadius();
                             ImageView currentImgObject = imageObjects.get(i);
 
-                            Vector deltaV = currentPhysObjectLocation.minus(screenLocation);
+                            Vector deltaV = currentPhysObjectLocation.minus(screenValues.getScreenLocation());
 
                             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)currentImgObject.getLayoutParams();
                             layoutParams.leftMargin = (int)(deltaV.getX() - imageOffset);

@@ -18,6 +18,8 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.gscape.sdp.galacticescape.Display.StarBackground.StarField;
+import com.gscape.sdp.galacticescape.Display.StarBackground.StarFieldRenderer;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.GravitationCalculator;
 import com.gscape.sdp.galacticescape.Engine.Physics.SimulationRunnable;
@@ -42,11 +44,10 @@ public class GamePlayScreen extends AppCompatActivity {
     private SimulationDisplayRunnable simulationDisplayer;
     private SimulationRunnable simulator;
     private TiltMovementRunnable tiltMovement;
+//    private StarFieldRenderer starFieldRenderer;
 
     private SimulationContents simulationContents;
-
-    private double contentDisplayHeight = 0;
-    private double contentDisplayWidth = 0;
+    private ScreenValues screenValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +68,15 @@ public class GamePlayScreen extends AppCompatActivity {
         Thread backSim = new Thread(simulator);
         Thread frontSim = new Thread(simulationDisplayer);
         Thread tiltSimulation = new Thread(tiltMovement);
+//        Thread background = new Thread(starFieldRenderer);
 
         backSim.start();
         frontSim.start();
         tiltSimulation.start();
+//        background.start();
     }
 
     private void init() {
-        Random rand = new Random();
         ArrayList<PhysicsObject> physicsObjects = new ArrayList<>(10);
         ArrayList<ImageView> imageObjects = new ArrayList<>(10);
 
@@ -97,8 +99,7 @@ public class GamePlayScreen extends AppCompatActivity {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        contentDisplayHeight = displayMetrics.heightPixels;
-        contentDisplayWidth = displayMetrics.widthPixels;
+        screenValues = new ScreenValues(Vector.make2D(displayMetrics.widthPixels, displayMetrics.heightPixels), Vector.make2D(0,0));
 
         for (PhysicsObject currentObject : physicsObjects) {
             int physicsObjectDiameter = (int) currentObject.getCollisionRadius() * 2;
@@ -132,14 +133,18 @@ public class GamePlayScreen extends AppCompatActivity {
 
         simulationContents = new SimulationContents(physicsObjects, imageObjects);
 
+//        StarField starField = new StarField(getApplicationContext(), screenValues);
+
         simulationState = new SimulationState();
         simulationState.setRunning();
 
         GravitationCalculator calculator = new GravitationCalculator(0.0067139);
 
         simulator = new SimulationRunnable(simulationContents, calculator, simulationState);
-        simulationDisplayer = new SimulationDisplayRunnable(simulationDisplay, Vector.make2D(contentDisplayWidth, contentDisplayHeight), simulationContents, simulationState);
+        simulationDisplayer = new SimulationDisplayRunnable(simulationDisplay, screenValues, simulationContents, simulationState);
 
         tiltMovement = new TiltMovementRunnable(new TiltAcceleration(physC, new Accelerometer(getApplicationContext())), physC, simulationState);
+
+//        starFieldRenderer = new StarFieldRenderer(starField, simulationState);
     }
 }
