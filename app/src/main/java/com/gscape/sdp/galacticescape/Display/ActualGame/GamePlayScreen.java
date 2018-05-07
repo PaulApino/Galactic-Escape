@@ -84,11 +84,11 @@ public class GamePlayScreen extends AppCompatActivity {
                 Vector.make2D(960, 500),
                 Vector.make2D( 0, 0),
                 Vector.make2D(0, 0));
-        PhysicsObject physB = new PhysicsObject(1539.47, 50.378,
+        PhysicsObject physB = new PhysicsObject(1539.47, 55.378,
                 Vector.make2D(500, 840),
                 Vector.make2D(1.2, 0.2),
                 Vector.make2D(0, 0));
-        PhysicsObject physC = new PhysicsObject(1530.35, 60.973,
+        PhysicsObject physC = new PhysicsObject(1530.35, 40.973,
                 Vector.make2D(1100, 340),
                 Vector.make2D(-1.45, -0.7),
                 Vector.make2D(0, 0));
@@ -101,10 +101,23 @@ public class GamePlayScreen extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenValues = new ScreenValues(Vector.make2D(displayMetrics.widthPixels, displayMetrics.heightPixels), Vector.make2D(0,0));
 
-        for (PhysicsObject currentObject : physicsObjects) {
-            int physicsObjectDiameter = (int) currentObject.getCollisionRadius() * 2;
 
-            Bitmap mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.temp_space_object);
+
+        for (int i = 0; i < physicsObjects.size(); i++) {
+            int physicsObjectDiameter = (int) physicsObjects.get(i).getCollisionRadius() * 2;
+
+            Bitmap mBitmap = null;
+
+            switch (i) {
+                case 0 :
+                    mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ship);
+                    break;
+                case 1 :
+                    mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.jupiter);
+                    break;
+                case 2 :
+                    mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.earth);
+            }
             Bitmap mResizedBitmap = Bitmap.createScaledBitmap(mBitmap, physicsObjectDiameter, physicsObjectDiameter, true);
 
             ImageView imageView = new ImageView(getApplicationContext());
