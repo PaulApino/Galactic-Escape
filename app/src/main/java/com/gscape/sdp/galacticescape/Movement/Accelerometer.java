@@ -30,7 +30,7 @@ public class Accelerometer implements SensorEventListener {
     //gets a new vector based on values provided by the sensor
     public Vector getVectorFromSensor()
     {
-       return Vector.make2D(y,-(x - 3));
+       return Vector.make2D(y,-(x - 3.5));
     }
 
     /*

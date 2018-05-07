@@ -1,6 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.HandlerThread;
@@ -36,7 +37,7 @@ import java.util.Random;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class GamePlayScreen extends AppCompatActivity {
+public class GamePlayScreen extends Activity {
 
     private RelativeLayout simulationDisplay;
 
@@ -117,6 +118,7 @@ public class GamePlayScreen extends AppCompatActivity {
                     break;
                 case 2 :
                     mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.earth);
+                    break;
             }
             Bitmap mResizedBitmap = Bitmap.createScaledBitmap(mBitmap, physicsObjectDiameter, physicsObjectDiameter, true);
 
