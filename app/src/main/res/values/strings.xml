@@ -4,7 +4,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
-    <string name="title_activity_game_play_display">GamePlayDisplay</string>
+    <string name="game_introduction">Introduction to Game</string>
 
     <string name="title_activity_game_play_screen">GamePlayScreen</string>
 

@@ -4,7 +4,7 @@
     android:id="@+id/game_play_screen_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2b2b2c"
+    android:background="#030303"
     tools:context=".Display.ActualGame.GamePlayScreen">
 
 </RelativeLayout>

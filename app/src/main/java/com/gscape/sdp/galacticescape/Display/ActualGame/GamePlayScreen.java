@@ -12,15 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.gscape.sdp.galacticescape.Display.StarBackground.StarField;
-import com.gscape.sdp.galacticescape.Display.StarBackground.StarFieldRenderer;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.GravitationCalculator;
 import com.gscape.sdp.galacticescape.Engine.Physics.SimulationRunnable;
@@ -31,7 +27,6 @@ import com.gscape.sdp.galacticescape.Movement.TiltMovementRunnable;
 import com.gscape.sdp.galacticescape.R;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -53,16 +48,14 @@ public class GamePlayScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game_play_screen);
 
         simulationDisplay = findViewById(R.id.game_play_screen_container);
-
-        simulationDisplay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         init();
 
