@@ -35,7 +35,7 @@ public class MainMenu extends AppCompatActivity {
                  */
 
                 Intent intro_to_Game = new Intent(MainMenu.this,
-                        GamePlayScreen.class);
+                        Introduction_togame.class);
                 /**
                  * intro_to_Game.putExtra("",""); <-- if you need to carry any
                  data into the next intent class.

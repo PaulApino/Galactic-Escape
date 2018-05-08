@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.gscape.sdp.galacticescape.Display.ActualGame.GamePlayScreen;
+
 public class Introduction_togame extends AppCompatActivity {
 
     Button skip_intro;
@@ -20,7 +22,7 @@ public class Introduction_togame extends AppCompatActivity {
         skip_intro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent skipped = new Intent(Introduction_togame.this, User_name_selection.class );
+                Intent skipped = new Intent(Introduction_togame.this, GamePlayScreen.class );
                 startActivity(skipped);
             }
         });
