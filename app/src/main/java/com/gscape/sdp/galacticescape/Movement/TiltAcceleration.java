@@ -19,19 +19,25 @@ public class TiltAcceleration {
         double xIntensity = vectorFromAccelmeter.getX();
         double yIntensity = vectorFromAccelmeter.getY();
 
-        if (xIntensity > -3 && xIntensity < 3) {
-            xIntensity = xIntensity / 3;
-        } else if (xIntensity <= -3) {
+        if (xIntensity > -4 && xIntensity < 4) {
+            xIntensity = xIntensity / 4;
+            if (xIntensity > -0.3 && xIntensity < 0.3) {
+                xIntensity = 0;
+            }
+        } else if (xIntensity <= -4) {
             xIntensity = -1;
         } else xIntensity = 1;
 
-        if (yIntensity > -3 && yIntensity < 3) {
-            yIntensity = yIntensity / 3;
-        } else if (yIntensity <= -3) {
+        if (yIntensity > -4 && yIntensity < 4) {
+            yIntensity = yIntensity / 4;
+            if (yIntensity > -0.3 && yIntensity < 0.3) {
+                yIntensity = 0;
+            }
+        } else if (yIntensity <= -4) {
             yIntensity = -1;
         } else yIntensity = 1;
 
-        Vector objectAccel = Vector.make2D(0.2 * xIntensity, 0.2 * yIntensity);
+        Vector objectAccel = Vector.make2D(0.15 * xIntensity, 0.15 * yIntensity);
 
         synchronized (physicsObject) {
             physicsObject.setVelocity(physicsObject.getVelocity().add(objectAccel));

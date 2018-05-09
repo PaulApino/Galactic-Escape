@@ -1,6 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.HandlerThread;
@@ -11,15 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.gscape.sdp.galacticescape.Display.StarBackground.StarField;
-import com.gscape.sdp.galacticescape.Display.StarBackground.StarFieldRenderer;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.GravitationCalculator;
 import com.gscape.sdp.galacticescape.Engine.Physics.SimulationRunnable;
@@ -30,13 +27,12 @@ import com.gscape.sdp.galacticescape.Movement.TiltMovementRunnable;
 import com.gscape.sdp.galacticescape.R;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class GamePlayScreen extends AppCompatActivity {
+public class GamePlayScreen extends Activity {
 
     private RelativeLayout simulationDisplay;
 
@@ -52,16 +48,14 @@ public class GamePlayScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game_play_screen);
 
         simulationDisplay = findViewById(R.id.game_play_screen_container);
-
-        simulationDisplay.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         init();
 
@@ -84,11 +78,11 @@ public class GamePlayScreen extends AppCompatActivity {
                 Vector.make2D(960, 500),
                 Vector.make2D( 0, 0),
                 Vector.make2D(0, 0));
-        PhysicsObject physB = new PhysicsObject(1539.47, 50.378,
+        PhysicsObject physB = new PhysicsObject(1539.47, 55.378,
                 Vector.make2D(500, 840),
                 Vector.make2D(1.2, 0.2),
                 Vector.make2D(0, 0));
-        PhysicsObject physC = new PhysicsObject(1530.35, 60.973,
+        PhysicsObject physC = new PhysicsObject(1530.35, 40.973,
                 Vector.make2D(1100, 340),
                 Vector.make2D(-1.45, -0.7),
                 Vector.make2D(0, 0));
@@ -101,10 +95,24 @@ public class GamePlayScreen extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenValues = new ScreenValues(Vector.make2D(displayMetrics.widthPixels, displayMetrics.heightPixels), Vector.make2D(0,0));
 
-        for (PhysicsObject currentObject : physicsObjects) {
-            int physicsObjectDiameter = (int) currentObject.getCollisionRadius() * 2;
 
-            Bitmap mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.temp_space_object);
+
+        for (int i = 0; i < physicsObjects.size(); i++) {
+            int physicsObjectDiameter = (int) physicsObjects.get(i).getCollisionRadius() * 2;
+
+            Bitmap mBitmap = null;
+
+            switch (i) {
+                case 0 :
+                    mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.ship);
+                    break;
+                case 1 :
+                    mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.jupiter);
+                    break;
+                case 2 :
+                    mBitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.earth);
+                    break;
+            }
             Bitmap mResizedBitmap = Bitmap.createScaledBitmap(mBitmap, physicsObjectDiameter, physicsObjectDiameter, true);
 
             ImageView imageView = new ImageView(getApplicationContext());
