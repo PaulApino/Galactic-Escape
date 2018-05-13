@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="71dp"
-        android:text="User Name Selection"
+        android:text="Create New User"
         android:textColor="@android:color/white"
         android:textSize="30sp" />
 
@@ -36,7 +36,6 @@
         android:layout_marginTop="164dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter Space Name"
         android:textColor="@android:color/white" />
 
     <Button
@@ -45,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="211dp"
+        android:layout_marginBottom="57dp"
         android:background="@android:drawable/button_onoff_indicator_on"
         android:text="Create User" />
 
