@@ -14,7 +14,11 @@ public class StarFieldChunk {
         stars = new ArrayList<>(50);
     }
 
-    public void generateChunk(int starCount) {
+    public Vector getChunkLocation() {
+        return chunkLocation;
+    }
 
+    public void addStar (BackgroundStar aStar) {
+        stars.add(aStar);
     }
 }
