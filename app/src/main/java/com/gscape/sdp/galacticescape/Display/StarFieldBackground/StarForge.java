@@ -70,6 +70,6 @@ public class StarForge {
         return new BackgroundStar(Vector.make2D(
                 Double.parseDouble(starStringSequence.substring(index - 9, index - 6)),
                 Double.parseDouble(starStringSequence.substring(index - 6, index - 3))),
-                Double.parseDouble(starStringSequence.substring(index - 3, index)));
+                Double.parseDouble(starStringSequence.substring(index - 1, index)));
     }
 }
