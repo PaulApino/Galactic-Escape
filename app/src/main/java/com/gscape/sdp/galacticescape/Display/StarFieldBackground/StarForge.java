@@ -38,7 +38,7 @@ public class StarForge {
             starValuesCounter++;
 
             if (starValuesCounter >= 3 && starValuesCounter % 3 == 0) {
-                chunk.addStar(getStar(i));
+                chunk.addStar(getStar(starStringSequence.length()));
             }
             s_start = s_end;
             s_end = s_current;
@@ -67,9 +67,10 @@ public class StarForge {
     }
 
     private BackgroundStar getStar (int index) {
+        double radius = Double.parseDouble(starStringSequence.substring(index - 1, index)) + 3;
         return new BackgroundStar(Vector.make2D(
                 Double.parseDouble(starStringSequence.substring(index - 9, index - 6)),
                 Double.parseDouble(starStringSequence.substring(index - 6, index - 3))),
-                Double.parseDouble(starStringSequence.substring(index - 1, index)));
+                radius);
     }
 }

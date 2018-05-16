@@ -27,29 +27,19 @@ public class StarFieldChunk {
         return chunkLocation;
     }
 
+    public ArrayList<BackgroundStar> getStars() {
+        return stars;
+    }
+
     public void addStar (BackgroundStar aStar) {
         stars.add(aStar);
     }
 
-    public View getChunkView (Context context) {
-        StarFieldChunkView chunkView = new StarFieldChunkView(context);
+    public StarFieldChunkView getChunkView (Context context) {
+        StarFieldChunkView chunkView = new StarFieldChunkView(context, stars);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(1000, 1000);
         chunkView.setLayoutParams(layoutParams);
         chunkView.setBackgroundColor(Color.BLACK);
         return chunkView;
-    }
-
-    private class StarFieldChunkView extends View {
-
-        public StarFieldChunkView(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas) {
-            for (BackgroundStar aStar : stars) {
-                canvas.drawCircle((float)aStar.getLocation().getX(), (float)aStar.getLocation().getY(), stars.size(), paint);
-            }
-        }
     }
 }
