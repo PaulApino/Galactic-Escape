@@ -44,55 +44,55 @@ public class StarFieldTest extends AppCompatActivity {
         StarFieldChunk chunk8 = new StarFieldChunk(Vector.make2D(0,-1000));
         StarFieldChunk chunk9 = new StarFieldChunk(Vector.make2D(1000,-1000));
 
-//        long start = System.nanoTime();
-//        Thread t1 = new Thread(new GeneratorRunnable(starForge, chunk1, 200));
-//        Thread t2 = new Thread(new GeneratorRunnable(starForge, chunk2, 200));
-//        Thread t3 = new Thread(new GeneratorRunnable(starForge, chunk3, 200));
-//        Thread t4 = new Thread(new GeneratorRunnable(starForge, chunk4, 200));
-//        Thread t5 = new Thread(new GeneratorRunnable(starForge, chunk5, 200));
-//        Thread t6 = new Thread(new GeneratorRunnable(starForge, chunk6, 200));
-//        Thread t7 = new Thread(new GeneratorRunnable(starForge, chunk7, 200));
-//        Thread t8 = new Thread(new GeneratorRunnable(starForge, chunk8, 200));
-//        Thread t9 = new Thread(new GeneratorRunnable(starForge, chunk9, 200));
-//        t1.start();
-//        t2.start();
-//        t3.start();
-//        t4.start();
-//        t5.start();
-//        t6.start();
-//        t7.start();
-//        t8.start();
-//        t9.start();
-//        try {
-//            t1.join();
-//            t2.join();
-//            t3.join();
-//            t4.join();
-//            t5.join();
-//            t6.join();
-//            t7.join();
-//            t8.join();
-//            t9.join();
-//        } catch (InterruptedException e) {}
-//        long end = System.nanoTime();
-//        end -= start;
-//
-//        Log.i("Generation Time", end + "");
-
         long start = System.nanoTime();
-        starForge.generateChunk(chunk1, 200);
-        starForge.generateChunk(chunk2, 200);
-        starForge.generateChunk(chunk3, 200);
-        starForge.generateChunk(chunk4, 200);
-        starForge.generateChunk(chunk5, 200);
-        starForge.generateChunk(chunk6, 200);
-        starForge.generateChunk(chunk7, 200);
-        starForge.generateChunk(chunk8, 200);
-        starForge.generateChunk(chunk9, 200);
+        Thread t1 = new Thread(new GeneratorRunnable(starForge, chunk1, 200));
+        Thread t2 = new Thread(new GeneratorRunnable(starForge, chunk2, 200));
+        Thread t3 = new Thread(new GeneratorRunnable(starForge, chunk3, 200));
+        Thread t4 = new Thread(new GeneratorRunnable(starForge, chunk4, 200));
+        Thread t5 = new Thread(new GeneratorRunnable(starForge, chunk5, 200));
+        Thread t6 = new Thread(new GeneratorRunnable(starForge, chunk6, 200));
+        Thread t7 = new Thread(new GeneratorRunnable(starForge, chunk7, 200));
+        Thread t8 = new Thread(new GeneratorRunnable(starForge, chunk8, 200));
+        Thread t9 = new Thread(new GeneratorRunnable(starForge, chunk9, 200));
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+        t5.start();
+        t6.start();
+        t7.start();
+        t8.start();
+        t9.start();
+        try {
+            t1.join();
+            t2.join();
+            t3.join();
+            t4.join();
+            t5.join();
+            t6.join();
+            t7.join();
+            t8.join();
+            t9.join();
+        } catch (InterruptedException e) {}
         long end = System.nanoTime();
         end -= start;
 
         Log.i("Generation Time", end + "");
+
+//        long start = System.nanoTime();
+//        starForge.generateChunk(chunk1, 200);
+//        starForge.generateChunk(chunk2, 200);
+//        starForge.generateChunk(chunk3, 200);
+//        starForge.generateChunk(chunk4, 200);
+//        starForge.generateChunk(chunk5, 200);
+//        starForge.generateChunk(chunk6, 200);
+//        starForge.generateChunk(chunk7, 200);
+//        starForge.generateChunk(chunk8, 200);
+//        starForge.generateChunk(chunk9, 200);
+//        long end = System.nanoTime();
+//        end -= start;
+//
+//        Log.i("Generation Time", end + "");
     }
 
     private class GeneratorRunnable implements Runnable {

@@ -20,12 +20,11 @@ public class BackgroundStar {
             Color.parseColor("#9bf2e7"),
             Color.parseColor("#f1ce96")};
 
-    public BackgroundStar(Vector location, double radius) {
+    public BackgroundStar(Vector location, double radius, int colour) {
         this.location = location;
         this.radius = radius;
-
         Random rand = new Random();
-        int color = STAR_COLORS[rand.nextInt(3)];
+        int chosenColour = STAR_COLORS[colour];
         paint = new Paint();
 
         if (radius > 1) {
@@ -35,9 +34,9 @@ public class BackgroundStar {
                     (float) location.getX(),
                     (float) location.getY(),
                     (float) radius,
-                    color, Color.TRANSPARENT, Shader.TileMode.MIRROR));
+                    chosenColour, Color.TRANSPARENT, Shader.TileMode.MIRROR));
         } else {
-            paint.setColor(color);
+            paint.setColor(chosenColour);
         }
     }
 
