@@ -99,15 +99,18 @@ public class StarForge {
     }
 
     private BackgroundStar getStar (int[] starValues) {
-        String value3;
-        if (starValues[2] < 10) {
-            value3 = "00" + starValues[2];
-        } else if (starValues[2] < 100) {
-            value3 = "0" + starValues[2];
-        } else value3 = Integer.toString(starValues[2]);
+//        String value3;
+//        if (starValues[2] < 10) {
+//            value3 = "00" + starValues[2];
+//        } else if (starValues[2] < 100) {
+//            value3 = "0" + starValues[2];
+//        } else value3 = Integer.toString(starValues[2]);
+//
+//        double radius = Integer.parseInt(value3.substring(2, 3)) + 1;
+//        int colour = Integer.parseInt(value3.substring(1, 2)) % 3;
 
-        double radius = Integer.parseInt(value3.substring(2, 3)) + 1;
-        int colour = Integer.parseInt(value3.substring(1, 2)) % 3;
+        double radius = starValues[2] % 10 + 1;
+        int colour = starValues[2] % 3;
         return new BackgroundStar(Vector.make2D(starValues[0], starValues[1]), radius, colour);
     }
 

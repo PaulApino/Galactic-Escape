@@ -23,7 +23,6 @@ public class BackgroundStar {
     public BackgroundStar(Vector location, double radius, int colour) {
         this.location = location;
         this.radius = radius;
-        Random rand = new Random();
         int chosenColour = STAR_COLORS[colour];
         paint = new Paint();
 
