@@ -30,7 +30,7 @@ public class SimulationDisplayRunnable implements Runnable {
                 if (simulationState.isSafeDisplay()) {
 
                     ArrayList<ImageView> imageObjects = contents.getImageObjects();
-                    ArrayList<RelativeLayout.LayoutParams> imageParameters = new ArrayList<>(imageObjects.size());
+//                    ArrayList<RelativeLayout.LayoutParams> imageParameters = new ArrayList<>(imageObjects.size());
 
                     synchronized (contents) {
                         ArrayList<PhysicsObject> physicsObjects = contents.getPhysicsObjects();
