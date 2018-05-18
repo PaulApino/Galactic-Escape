@@ -19,6 +19,10 @@ public class StarFieldChunkView extends View {
         backgroundStars = chunk.getStars();
     }
 
+    public void setNewChunk (StarFieldChunk starFieldChunk) {
+        backgroundStars = starFieldChunk.getStars();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         if (!backgroundStars.isEmpty()) {
