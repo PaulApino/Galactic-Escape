@@ -15,15 +15,7 @@ public class ScreenValues {
     }
 
     public Vector getScreenSize() {
-        synchronized (this) {
-            return screenSize;
-        }
-    }
-
-    public void setScreenSize(Vector screenSize) {
-        synchronized (this) {
-            this.screenSize = screenSize;
-        }
+        return screenSize;
     }
 
     public Vector getScreenLocation() {

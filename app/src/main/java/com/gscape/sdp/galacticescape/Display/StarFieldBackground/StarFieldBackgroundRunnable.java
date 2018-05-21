@@ -1,6 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
 import android.content.Context;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 
 import com.gscape.sdp.galacticescape.Display.ActualGame.ScreenValues;
@@ -36,7 +37,7 @@ public class StarFieldBackgroundRunnable implements Runnable {
 
             int containerDistX = (int)((1000 * starFieldBackground.getSideChunkCountX()) - (screenValues.getScreenSize().getX() / 2) + distChunkCentX);
             int containerDistY = (int)((1000 * starFieldBackground.getSideChunkCountY()) - (screenValues.getScreenSize().getY() / 2) + distChunkCentY);
-            final TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams)container.getLayoutParams();
+            final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)container.getLayoutParams();
             layoutParams.leftMargin = containerDistX;
             layoutParams.bottomMargin = containerDistY;
             container.post(new Runnable() {
@@ -57,6 +58,10 @@ public class StarFieldBackgroundRunnable implements Runnable {
                 Thread.sleep(30);
             } catch (InterruptedException e) {}
         }
+    }
+
+    public StarFieldBackground getStarFieldBackground() {
+        return starFieldBackground;
     }
 
     private StarFieldChunkView[][] initViews () {

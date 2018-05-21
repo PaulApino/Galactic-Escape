@@ -26,7 +26,7 @@ public class StarFieldTest extends AppCompatActivity {
         contentLayout = findViewById(R.id.test_starfield_layout);
 
         starForge = new StarForge(2269);
-        chunk = new StarFieldChunk(Vector.make2D(0,0));
+//        chunk = new StarFieldChunk(Vector.make2D(0,0));
         long start = System.nanoTime();
         starForge.generateStars(chunk, 200);
         long end = System.nanoTime();

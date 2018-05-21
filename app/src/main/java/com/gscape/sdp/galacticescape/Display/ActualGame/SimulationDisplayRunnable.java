@@ -30,12 +30,14 @@ public class SimulationDisplayRunnable implements Runnable {
                 if (simulationState.isSafeDisplay()) {
 
                     ArrayList<ImageView> imageObjects = contents.getImageObjects();
-//                    ArrayList<RelativeLayout.LayoutParams> imageParameters = new ArrayList<>(imageObjects.size());
 
                     synchronized (contents) {
                         ArrayList<PhysicsObject> physicsObjects = contents.getPhysicsObjects();
 
                         PhysicsObject player = physicsObjects.get(0);
+                        screenValues.setScreenCentreLocation(Vector.make2D(
+                                player.getLocation().getX(),
+                                player.getLocation().getY()));
                         screenValues.setScreenLocation(Vector.make2D(
                                 player.getLocation().getX() - (screenValues.getScreenSize().getX() / 2),
                                 player.getLocation().getY() - (screenValues.getScreenSize().getY() / 2)));

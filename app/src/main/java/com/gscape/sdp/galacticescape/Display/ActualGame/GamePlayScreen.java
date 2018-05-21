@@ -1,22 +1,21 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 
+import com.gscape.sdp.galacticescape.Display.StarFieldBackground.StarFieldBackgroundRunnable;
+import com.gscape.sdp.galacticescape.Display.StarFieldBackground.StarFieldChunkView;
+import com.gscape.sdp.galacticescape.Display.StarFieldBackground.StarForge;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.GravitationCalculator;
 import com.gscape.sdp.galacticescape.Engine.Physics.SimulationRunnable;
@@ -34,16 +33,19 @@ import java.util.ArrayList;
  */
 public class GamePlayScreen extends Activity {
 
+    private RelativeLayout mainDisplay;
+    private TableLayout starFieldBackgroundDisplay;
     private RelativeLayout simulationDisplay;
 
     private SimulationState simulationState;
     private SimulationDisplayRunnable simulationDisplayer;
     private SimulationRunnable simulator;
+    private StarFieldBackgroundRunnable starFieldBackgroundRunnable;
     private TiltMovementRunnable tiltMovement;
-//    private StarFieldRenderer starFieldRenderer;
 
     private SimulationContents simulationContents;
     private ScreenValues screenValues;
+    private StarForge starForge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +57,35 @@ public class GamePlayScreen extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game_play_screen);
 
-        simulationDisplay = findViewById(R.id.game_play_screen_container);
+        mainDisplay = findViewById(R.id.game_play_screen_container);
+
+        starFieldBackgroundDisplay = new TableLayout(getApplication());
+        RelativeLayout.LayoutParams starParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        starParams.addRule(RelativeLayout.ALIGN_PARENT_START);
+        starParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        starParams.topMargin = Integer.MIN_VALUE;
+        starParams.bottomMargin = Integer.MIN_VALUE;
+        starParams.leftMargin = Integer.MIN_VALUE;
+        starParams.rightMargin = Integer.MIN_VALUE;
+        starFieldBackgroundDisplay.setLayoutParams(starParams);
+        mainDisplay.addView(starFieldBackgroundDisplay);
+
+        simulationDisplay = new RelativeLayout(getApplication());
+        RelativeLayout.LayoutParams simulationParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        simulationDisplay.setLayoutParams(simulationParams);
+        mainDisplay.addView(simulationDisplay);
 
         init();
 
         Thread backSim = new Thread(simulator);
         Thread frontSim = new Thread(simulationDisplayer);
-        Thread tiltSimulation = new Thread(tiltMovement);
-//        Thread background = new Thread(starFieldRenderer);
+        Thread starSim = new Thread(starFieldBackgroundRunnable);
+//        Thread tiltSimulation = new Thread(tiltMovement);
 
         backSim.start();
         frontSim.start();
-        tiltSimulation.start();
-//        background.start();
+        starSim.start();
+//        tiltSimulation.start();
     }
 
     private void init() {
@@ -93,9 +111,9 @@ public class GamePlayScreen extends Activity {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        screenValues = new ScreenValues(Vector.make2D(displayMetrics.widthPixels, displayMetrics.heightPixels), Vector.make2D(0,0));
+        screenValues = new ScreenValues(Vector.make2D(displayMetrics.widthPixels, displayMetrics.heightPixels), Vector.make2D(0,0), physC.getLocation());
 
-
+        starForge = new StarForge(9237);
 
         for (int i = 0; i < physicsObjects.size(); i++) {
             int physicsObjectDiameter = (int) physicsObjects.get(i).getCollisionRadius() * 2;
@@ -141,8 +159,6 @@ public class GamePlayScreen extends Activity {
 
         simulationContents = new SimulationContents(physicsObjects, imageObjects);
 
-//        StarField starField = new StarField(getApplicationContext(), screenValues);
-
         simulationState = new SimulationState();
         simulationState.setRunning();
 
@@ -151,8 +167,16 @@ public class GamePlayScreen extends Activity {
         simulator = new SimulationRunnable(simulationContents, calculator, simulationState);
         simulationDisplayer = new SimulationDisplayRunnable(simulationDisplay, screenValues, simulationContents, simulationState);
 
-        tiltMovement = new TiltMovementRunnable(new TiltAcceleration(physC, new Accelerometer(getApplicationContext())), physC, simulationState);
+        starFieldBackgroundRunnable = new StarFieldBackgroundRunnable(getApplication(), starFieldBackgroundDisplay, starForge, screenValues, simulationState);
 
-//        starFieldRenderer = new StarFieldRenderer(starField, simulationState);
+        StarFieldChunkView[][] starFieldChunkViews = new StarFieldChunkView[starFieldBackgroundRunnable.getStarFieldBackground().getMaxMatrixRow()][starFieldBackgroundRunnable.getStarFieldBackground().getMaxMatrixColumn()];
+        TableRow[] rowViews = new TableRow[starFieldChunkViews.length];
+
+        for (int i = 0; i < starFieldBackgroundRunnable.getStarFieldBackground().getMaxMatrixRow(); i++) {
+            for (int j = 0; j < starFieldBackgroundRunnable.getStarFieldBackground().getMaxMatrixColumn(); j++) {
+            }
+        }
+
+        tiltMovement = new TiltMovementRunnable(new TiltAcceleration(physC, new Accelerometer(getApplicationContext())), physC, simulationState);
     }
 }
