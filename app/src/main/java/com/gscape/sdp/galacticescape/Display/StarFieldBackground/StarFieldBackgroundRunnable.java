@@ -1,6 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 
@@ -14,13 +15,13 @@ public class StarFieldBackgroundRunnable implements Runnable {
     private final static int GREATER_NEGATIVE = 1;
 
     private final Context context;
-    private final TableLayout container;
+    private final RelativeLayout container;
     private final StarFieldChunkView[][] starFieldChunkViews;
     private final StarFieldBackground starFieldBackground;
     private final ScreenValues screenValues;
     private final SimulationState simulationState;
 
-    public StarFieldBackgroundRunnable(Context context, TableLayout container, StarForge starForge, ScreenValues screenValues, SimulationState simulationState) {
+    public StarFieldBackgroundRunnable(Context context, RelativeLayout container, StarForge starForge, ScreenValues screenValues, SimulationState simulationState) {
         this.context = context;
         this.container = container;
         this.screenValues = screenValues;
@@ -35,8 +36,9 @@ public class StarFieldBackgroundRunnable implements Runnable {
             int distChunkCentX = (int)Math.ceil(screenValues.getScreenCentreLocation().getX()) - (starFieldBackground.getCentreChunkX() + 500);
             int distChunkCentY = (int)Math.ceil(screenValues.getScreenCentreLocation().getY()) - (starFieldBackground.getCentreChunkY() + 500);
 
-            int containerDistX = (int)((1000 * starFieldBackground.getSideChunkCountX()) - (screenValues.getScreenSize().getX() / 2) + distChunkCentX);
-            int containerDistY = (int)((1000 * starFieldBackground.getSideChunkCountY()) - (screenValues.getScreenSize().getY() / 2) + distChunkCentY);
+            int containerDistX = (1000 * -(starFieldBackground.getSideChunkCountX() + 1)) + (int)(screenValues.getScreenSize().getX() / 2) - distChunkCentX;
+            int containerDistY = (1000 * -(starFieldBackground.getSideChunkCountY() + 1)) + (int)(screenValues.getScreenSize().getY() / 2) - distChunkCentY;
+
             final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)container.getLayoutParams();
             layoutParams.leftMargin = containerDistX;
             layoutParams.bottomMargin = containerDistY;
@@ -44,6 +46,7 @@ public class StarFieldBackgroundRunnable implements Runnable {
                 @Override
                 public void run() {
                     container.setLayoutParams(layoutParams);
+                    container.invalidate();
                 }
             });
 
@@ -55,7 +58,7 @@ public class StarFieldBackgroundRunnable implements Runnable {
             }
 
             try {
-                Thread.sleep(30);
+                Thread.sleep(20);
             } catch (InterruptedException e) {}
         }
     }
@@ -65,7 +68,7 @@ public class StarFieldBackgroundRunnable implements Runnable {
     }
 
     private StarFieldChunkView[][] initViews () {
-        StarFieldChunkView[][] initViews = new StarFieldChunkView[starFieldBackground.getMaxMatrixRow()][starFieldBackground.getMaxMatrixRow()];
+        StarFieldChunkView[][] initViews = new StarFieldChunkView[starFieldBackground.getMaxMatrixRow()][starFieldBackground.getMaxMatrixColumn()];
         StarFieldChunk[][] initChunks = starFieldBackground.getStarFieldChunks();
         for (int i = 0; i < starFieldBackground.getMaxMatrixRow(); i++) {
             for (int j = 0; j < starFieldBackground.getMaxMatrixColumn(); j++) {

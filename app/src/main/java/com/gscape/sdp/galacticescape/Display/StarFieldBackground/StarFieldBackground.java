@@ -1,5 +1,10 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
+import android.content.Context;
+import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.TableRow;
+
 import com.gscape.sdp.galacticescape.Display.ActualGame.ScreenValues;
 
 public class StarFieldBackground {
@@ -26,18 +31,17 @@ public class StarFieldBackground {
 
     public StarFieldBackground(StarForge starForge, ScreenValues screenValues) {
         this.starForge = starForge;
-        this.centreChunkX = (int)Math.ceil((screenValues.getScreenCentreLocation().getX() / 1000)) * 1000;
-        this.centreChunkY = (int)Math.ceil((screenValues.getScreenCentreLocation().getY() / 1000)) * 1000;
-        this.sideChunkCountX = (int)Math.ceil(screenValues.getScreenSize().getX() / 1000);
-        this.sideChunkCountY =  (int)Math.ceil(screenValues.getScreenSize().getX() / 1000);
-        this.maxMatrixColumn = sideChunkCountX * 2;
-        this.maxMatrixRow = sideChunkCountY * 2;
+        this.centreChunkX = ((int)(screenValues.getScreenCentreLocation().getX() / 1000)) * 1000;
+        this.centreChunkY = ((int)(screenValues.getScreenCentreLocation().getY() / 1000)) * 1000;
+        this.sideChunkCountX = (int)Math.round(screenValues.getScreenSize().getX() / 1000);
+        this.sideChunkCountY = (int)Math.round(screenValues.getScreenSize().getY() / 1000);
+        this.maxMatrixColumn = sideChunkCountX * 2 + 1;
+        this.maxMatrixRow = sideChunkCountY * 2 + 1;
 
         initGenerate();
     }
 
     private void initGenerate() {
-
         starFieldChunks = new StarFieldChunk[maxMatrixRow][maxMatrixColumn];
 
         int currentChunkX = centreChunkX - (sideChunkCountX * 1000);
@@ -54,11 +58,23 @@ public class StarFieldBackground {
     }
 
     private void generateChunk(StarFieldChunk starFieldChunk) {
-        starFieldChunk.generateChunk(starForge, 40);
+        starFieldChunk.generateChunk(starForge, 100);
     }
 
     public StarFieldChunk[][] getStarFieldChunks() {
         return starFieldChunks;
+    }
+
+    public StarFieldChunkView[][] getStarFieldChunkViews (Context context) {
+        StarFieldChunkView[][] starFieldChunkViews = new StarFieldChunkView[maxMatrixRow][maxMatrixColumn];
+        for (int i = 0; i < maxMatrixRow; i++) {
+            for (int j = 0; j < maxMatrixColumn; j++) {
+                starFieldChunkViews[i][j] = new StarFieldChunkView(context, starFieldChunks[i][j]);
+                TableRow.LayoutParams chunkParams = new TableRow.LayoutParams(1000, 1000);
+                starFieldChunkViews[i][j].setLayoutParams(chunkParams);
+            }
+        }
+        return starFieldChunkViews;
     }
 
     public int getCentreChunkX() {

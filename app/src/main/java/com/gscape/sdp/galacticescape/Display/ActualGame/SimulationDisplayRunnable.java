@@ -54,6 +54,13 @@ public class SimulationDisplayRunnable implements Runnable {
                             layoutParams.bottomMargin = (int)(deltaV.getY() - imageOffset);
                             container.post(new LayoutParameterUpdate(currentImgObject, layoutParams));
                         }
+
+                        container.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                container.invalidate();
+                            }
+                        });
                     }
 
                     simulationState.setDisplayFinished();
@@ -79,7 +86,6 @@ public class SimulationDisplayRunnable implements Runnable {
         @Override
         public void run() {
             images.setLayoutParams(layoutParams);
-            container.invalidate();
         }
     }
 }

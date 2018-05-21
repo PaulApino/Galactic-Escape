@@ -3,8 +3,10 @@ package com.gscape.sdp.galacticescape.Display.ActualGame;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -34,7 +36,8 @@ import java.util.ArrayList;
 public class GamePlayScreen extends Activity {
 
     private RelativeLayout mainDisplay;
-    private TableLayout starFieldBackgroundDisplay;
+    private RelativeLayout starFieldBackgroundContainer;
+    private TableLayout starFieldBackgroundTable;
     private RelativeLayout simulationDisplay;
 
     private SimulationState simulationState;
@@ -58,19 +61,24 @@ public class GamePlayScreen extends Activity {
         setContentView(R.layout.activity_game_play_screen);
 
         mainDisplay = findViewById(R.id.game_play_screen_container);
+        
+        starFieldBackgroundContainer = new RelativeLayout(getApplicationContext());
+        RelativeLayout.LayoutParams starContainerParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        starContainerParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        starContainerParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        starContainerParams.topMargin = Integer.MIN_VALUE;
+        starContainerParams.bottomMargin = Integer.MIN_VALUE;
+        starContainerParams.leftMargin = Integer.MIN_VALUE;
+        starContainerParams.rightMargin = Integer.MIN_VALUE;
+        starFieldBackgroundContainer.setLayoutParams(starContainerParams);
+        mainDisplay.addView(starFieldBackgroundContainer);
 
-        starFieldBackgroundDisplay = new TableLayout(getApplication());
-        RelativeLayout.LayoutParams starParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        starParams.addRule(RelativeLayout.ALIGN_PARENT_START);
-        starParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        starParams.topMargin = Integer.MIN_VALUE;
-        starParams.bottomMargin = Integer.MIN_VALUE;
-        starParams.leftMargin = Integer.MIN_VALUE;
-        starParams.rightMargin = Integer.MIN_VALUE;
-        starFieldBackgroundDisplay.setLayoutParams(starParams);
-        mainDisplay.addView(starFieldBackgroundDisplay);
+        starFieldBackgroundTable = new TableLayout(getApplicationContext());
+        TableLayout.LayoutParams starTable = new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        starFieldBackgroundTable.setLayoutParams(starTable);
+        starFieldBackgroundContainer.addView(starFieldBackgroundTable);
 
-        simulationDisplay = new RelativeLayout(getApplication());
+        simulationDisplay = new RelativeLayout(getApplicationContext());
         RelativeLayout.LayoutParams simulationParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         simulationDisplay.setLayoutParams(simulationParams);
         mainDisplay.addView(simulationDisplay);
@@ -167,14 +175,15 @@ public class GamePlayScreen extends Activity {
         simulator = new SimulationRunnable(simulationContents, calculator, simulationState);
         simulationDisplayer = new SimulationDisplayRunnable(simulationDisplay, screenValues, simulationContents, simulationState);
 
-        starFieldBackgroundRunnable = new StarFieldBackgroundRunnable(getApplication(), starFieldBackgroundDisplay, starForge, screenValues, simulationState);
+        starFieldBackgroundRunnable = new StarFieldBackgroundRunnable(getApplicationContext(), starFieldBackgroundContainer, starForge, screenValues, simulationState);
 
-        StarFieldChunkView[][] starFieldChunkViews = new StarFieldChunkView[starFieldBackgroundRunnable.getStarFieldBackground().getMaxMatrixRow()][starFieldBackgroundRunnable.getStarFieldBackground().getMaxMatrixColumn()];
-        TableRow[] rowViews = new TableRow[starFieldChunkViews.length];
-
-        for (int i = 0; i < starFieldBackgroundRunnable.getStarFieldBackground().getMaxMatrixRow(); i++) {
-            for (int j = 0; j < starFieldBackgroundRunnable.getStarFieldBackground().getMaxMatrixColumn(); j++) {
+        StarFieldChunkView[][] chunkViews = starFieldBackgroundRunnable.getStarFieldBackground().getStarFieldChunkViews(getApplicationContext());
+        for (int i = 0; i < chunkViews.length; i++) {
+            TableRow aRow = new TableRow(getApplicationContext());
+            for (int j = 0; j < chunkViews[i].length; j++) {
+                aRow.addView(chunkViews[i][j]);
             }
+            starFieldBackgroundTable.addView(aRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
 
         tiltMovement = new TiltMovementRunnable(new TiltAcceleration(physC, new Accelerometer(getApplicationContext())), physC, simulationState);
