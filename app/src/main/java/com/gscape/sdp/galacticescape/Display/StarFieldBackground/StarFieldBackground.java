@@ -1,15 +1,17 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
+import com.gscape.sdp.galacticescape.Display.ActualGame.ScreenValues;
+
 public class StarFieldBackground {
 
-    private final static int NORTH = 0;
-    private final static int EAST = 1;
-    private final static int WEST = 2;
-    private final static int SOUTH = 3;
-    private final static int NORTH_EAST = 4;
-    private final static int NORTH_WEST = 5;
-    private final static int SOUTH_EAST = 6;
-    private final static int SOUTH_WEST = 7;
+    public final static int NORTH = 0;
+    public final static int EAST = 1;
+    public final static int WEST = 2;
+    public final static int SOUTH = 3;
+    public final static int NORTH_EAST = 4;
+    public final static int NORTH_WEST = 5;
+    public final static int SOUTH_EAST = 6;
+    public final static int SOUTH_WEST = 7;
 
     private StarFieldChunk[][] starFieldChunks;
     private final StarForge starForge;
@@ -22,19 +24,20 @@ public class StarFieldBackground {
     private final int sideChunkCountX;
     private final int sideChunkCountY;
 
-    public StarFieldBackground(StarForge starForge, int centreChunkX, int centreChunkY, int maxMatrixColumn, int maxMatrixRow) {
+    public StarFieldBackground(StarForge starForge, ScreenValues screenValues) {
         this.starForge = starForge;
-        this.centreChunkX = centreChunkX;
-        this.centreChunkY = centreChunkY;
-        this.maxMatrixColumn = maxMatrixColumn;
-        this.maxMatrixRow = maxMatrixRow;
-        this.sideChunkCountX = maxMatrixColumn / 2;
-        this.sideChunkCountY = maxMatrixRow / 2;
+        this.centreChunkX = (int)Math.ceil((screenValues.getScreenCentreLocation().getX() / 1000)) * 1000;
+        this.centreChunkY = (int)Math.ceil((screenValues.getScreenCentreLocation().getY() / 1000)) * 1000;
+        this.sideChunkCountX = (int)Math.ceil(screenValues.getScreenSize().getX() / 1000);
+        this.sideChunkCountY =  (int)Math.ceil(screenValues.getScreenSize().getX() / 1000);
+        this.maxMatrixColumn = sideChunkCountX * 2;
+        this.maxMatrixRow = sideChunkCountY * 2;
 
         initGenerate();
     }
 
     private void initGenerate() {
+
         starFieldChunks = new StarFieldChunk[maxMatrixRow][maxMatrixColumn];
 
         int currentChunkX = centreChunkX - (sideChunkCountX * 1000);
@@ -51,7 +54,7 @@ public class StarFieldBackground {
     }
 
     private void generateChunk(StarFieldChunk starFieldChunk) {
-        starFieldChunk.generateChunk(starForge, 100);
+        starFieldChunk.generateChunk(starForge, 40);
     }
 
     public StarFieldChunk[][] getStarFieldChunks() {
@@ -64,6 +67,22 @@ public class StarFieldBackground {
 
     public int getCentreChunkY() {
         return centreChunkY;
+    }
+
+    public int getMaxMatrixColumn() {
+        return maxMatrixColumn;
+    }
+
+    public int getMaxMatrixRow() {
+        return maxMatrixRow;
+    }
+
+    public int getSideChunkCountX() {
+        return sideChunkCountX;
+    }
+
+    public int getSideChunkCountY() {
+        return sideChunkCountY;
     }
 
     public boolean backgroundUpdate (int newCentreChunk) {
