@@ -6,22 +6,16 @@ public class ScreenValues {
 
     private Vector screenSize;
     private Vector screenLocation;
+    private Vector screenCentreLocation;
 
-    public ScreenValues(Vector screenSize, Vector screenLocation) {
+    public ScreenValues(Vector screenSize, Vector screenLocation, Vector screenCentreLocation) {
         this.screenSize = screenSize;
         this.screenLocation = screenLocation;
+        this.screenCentreLocation = screenCentreLocation;
     }
 
     public Vector getScreenSize() {
-        synchronized (this) {
-            return screenSize;
-        }
-    }
-
-    public void setScreenSize(Vector screenSize) {
-        synchronized (this) {
-            this.screenSize = screenSize;
-        }
+        return screenSize;
     }
 
     public Vector getScreenLocation() {
@@ -34,5 +28,13 @@ public class ScreenValues {
         synchronized (this) {
             this.screenLocation = screenLocation;
         }
+    }
+
+    public Vector getScreenCentreLocation() {
+        return screenCentreLocation;
+    }
+
+    public void setScreenCentreLocation(Vector screenCentreLocation) {
+        this.screenCentreLocation = screenCentreLocation;
     }
 }

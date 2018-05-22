@@ -11,25 +11,43 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name=".MainMenu"
-            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_main_menu">
+            android:label="@string/title_activity_main_menu"
+            android:screenOrientation="landscape">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity
+            android:name=".Introduction_togame"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:label="@string/game_introduction"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Display.ActualGame.GamePlayScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game_play_screen"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Introduction_togame"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|keyboard|screenSize"
-            android:label="@string/game_introduction">
-        </activity>
+        <activity android:name=".User_name_selection" />
+        <activity android:name=".List_of_users" />
         <activity
-            android:name=".Display.ActualGame.GamePlayScreen"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_game_play_screen">
+            android:name=".Display.TestDisplay.StarFieldTest"
+            android:configChanges="orientation|keyboard|screenSize"
+            android:label="StarFieldTest"
+            android:screenOrientation="landscape">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 

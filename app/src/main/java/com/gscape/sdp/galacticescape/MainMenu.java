@@ -17,6 +17,7 @@ public class MainMenu extends AppCompatActivity {
     private ConstraintLayout menuContainer;
     private Button start_new_game;
     private Button quit_game;
+    private Button con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class MainMenu extends AppCompatActivity {
         start_new_game = findViewById(R.id.new_gameID);
 
         menuContainer = findViewById(R.id.main_menu_container);
+
+        con = findViewById(R.id.continueID);
 
         start_new_game.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +52,16 @@ public class MainMenu extends AppCompatActivity {
                  */
                 startActivity(intro_to_Game); //starts the new activity
 
+            }
+        });
+
+
+        con.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intro_to_Game = new Intent(MainMenu.this,
+                        List_of_users.class);
+                startActivity(intro_to_Game);
             }
         });
 
