@@ -76,6 +76,7 @@ public class GamePlayScreen extends Activity {
         starFieldBackgroundTable = new TableLayout(getApplicationContext());
         TableLayout.LayoutParams starTable = new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         starFieldBackgroundTable.setLayoutParams(starTable);
+        starFieldBackgroundTable.setWillNotDraw(false);
         starFieldBackgroundContainer.addView(starFieldBackgroundTable);
 
         simulationDisplay = new RelativeLayout(getApplicationContext());
@@ -110,12 +111,12 @@ public class GamePlayScreen extends Activity {
                 Vector.make2D(0, 0));
         PhysicsObject physC = new PhysicsObject(1530.35, 40.973,
                 Vector.make2D(1100, 340),
-                Vector.make2D(-1.45, -0.7),
+                Vector.make2D(2.45, 0),
                 Vector.make2D(0, 0));
 
         physicsObjects.add(physC);
-        physicsObjects.add(physA);
-        physicsObjects.add(physB);
+//        physicsObjects.add(physA);
+//        physicsObjects.add(physB);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -180,6 +181,7 @@ public class GamePlayScreen extends Activity {
         StarFieldChunkView[][] chunkViews = starFieldBackgroundRunnable.getStarFieldBackground().getStarFieldChunkViews(getApplicationContext());
         for (int i = 0; i < chunkViews.length; i++) {
             TableRow aRow = new TableRow(getApplicationContext());
+            aRow.setWillNotDraw(false);
             for (int j = 0; j < chunkViews[i].length; j++) {
                 aRow.addView(chunkViews[i][j]);
             }
