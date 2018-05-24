@@ -49,7 +49,7 @@ public class User_name_selection extends AppCompatActivity {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 for (DataSnapshot child : children) {
                     User user = child.getValue(User.class);
-                    Useradd.add(user);
+                   Useradd.add(user);
                 }
             }
 

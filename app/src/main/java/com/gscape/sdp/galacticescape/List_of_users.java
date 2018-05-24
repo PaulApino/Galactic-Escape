@@ -26,9 +26,7 @@ public class List_of_users extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRootReference = firebaseDatabase.getReference();
-    private DatabaseReference mrefpatient = mRootReference;
     ListView currentUsers;
-    private ArrayList<User> patientdata = new ArrayList<>();
     private  ArrayList<String> users = new ArrayList<>();
 
 
@@ -53,9 +51,6 @@ public class List_of_users extends AppCompatActivity {
                     currentUsers.setAdapter(arrayAdapter);
 
                 }
-//                for(int i=0; i< patientdata.size();  i++){
-//                    users.add(patientdata.get(i).getUsername());
-//                }
 
 
 
