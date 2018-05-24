@@ -30,12 +30,14 @@ public class SimulationDisplayRunnable implements Runnable {
                 if (simulationState.isSafeDisplay()) {
 
                     ArrayList<ImageView> imageObjects = contents.getImageObjects();
-                    ArrayList<RelativeLayout.LayoutParams> imageParameters = new ArrayList<>(imageObjects.size());
 
                     synchronized (contents) {
                         ArrayList<PhysicsObject> physicsObjects = contents.getPhysicsObjects();
 
                         PhysicsObject player = physicsObjects.get(0);
+                        screenValues.setScreenCentreLocation(Vector.make2D(
+                                player.getLocation().getX(),
+                                player.getLocation().getY()));
                         screenValues.setScreenLocation(Vector.make2D(
                                 player.getLocation().getX() - (screenValues.getScreenSize().getX() / 2),
                                 player.getLocation().getY() - (screenValues.getScreenSize().getY() / 2)));
@@ -52,6 +54,13 @@ public class SimulationDisplayRunnable implements Runnable {
                             layoutParams.bottomMargin = (int)(deltaV.getY() - imageOffset);
                             container.post(new LayoutParameterUpdate(currentImgObject, layoutParams));
                         }
+
+                        container.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                container.invalidate();
+                            }
+                        });
                     }
 
                     simulationState.setDisplayFinished();
@@ -77,7 +86,6 @@ public class SimulationDisplayRunnable implements Runnable {
         @Override
         public void run() {
             images.setLayoutParams(layoutParams);
-            container.invalidate();
         }
     }
 }

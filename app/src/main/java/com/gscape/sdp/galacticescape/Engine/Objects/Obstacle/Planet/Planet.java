@@ -1,9 +1,10 @@
 package com.gscape.sdp.galacticescape.Engine.Objects.Obstacle.Planet;
 
+import com.gscape.sdp.galacticescape.Engine.Objects.Obstacle.Obstacle;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
-public class Planet extends PhysicsObject{
+public class Planet extends Obstacle{
 
     /**
      * Makes a Planet from the given values.
