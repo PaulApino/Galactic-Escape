@@ -69,19 +69,14 @@ public class User_name_selection extends AppCompatActivity {
                 u.setCurrentPos("0");
                 u.setLives("1");
                 u.setScore("0");
-
                 mRootReference.child(u.getUsername()).setValue(u);
-
                 Toast.makeText(User_name_selection.this, "User Name created successfully!",
                         Toast.LENGTH_SHORT).show();
-
-
-
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
+                        finish();
                         Intent i=new Intent(User_name_selection.this, GamePlayScreen.class);
                         startActivity(i);
                     }
