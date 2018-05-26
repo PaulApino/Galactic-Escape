@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "760151213600",
+    "firebase_url": "https://galactic-escape.firebaseio.com",
+    "project_id": "galactic-escape",
+    "storage_bucket": "galactic-escape.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760151213600:android:4f977455367bfc82",
+        "android_client_info": {
+          "package_name": "com.gscape.sdp.galacticescape"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760151213600-m58oga6f7fpn71b156th701oujm9u4tj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-M_vg7r9YHPTFRnZQJGpCaio4shq-Mt0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
