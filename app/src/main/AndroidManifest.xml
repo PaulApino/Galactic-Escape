@@ -39,7 +39,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".User_name_selection" />
-        <activity android:name=".List_of_users" />
+        <activity android:name=".CurrentUsers" />
         <activity android:name=".Submenu"></activity>
         <activity
             android:name=".Display.TestDisplay.StarFieldTest"
