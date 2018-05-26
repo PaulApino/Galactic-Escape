@@ -29,8 +29,6 @@ public class List_of_users extends AppCompatActivity {
     ListView currentUsers;
     private  ArrayList<String> users = new ArrayList<>();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +37,6 @@ public class List_of_users extends AppCompatActivity {
         currentUsers = (ListView) findViewById(R.id.list_of_usersListView);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(List_of_users.this, android.R.layout.simple_list_item_1, users);
         currentUsers.setAdapter(arrayAdapter);
-
 
         mRootReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -51,9 +48,6 @@ public class List_of_users extends AppCompatActivity {
                     currentUsers.setAdapter(arrayAdapter);
 
                 }
-
-
-
             }
 
             @Override
