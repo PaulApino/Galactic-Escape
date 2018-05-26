@@ -29,13 +29,11 @@ public class User_name_selection extends AppCompatActivity {
     Button create_userBT;
     EditText username;
     
-    
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_name_selection);
-
         username =  findViewById(R.id.user_edit);
         create_userBT = findViewById(R.id.save_user);
         
