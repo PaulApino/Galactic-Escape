@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-
-import com.gscape.sdp.galacticescape.Display.ActualGame.GamePlayScreen;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -60,7 +57,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intro_to_Game = new Intent(MainMenu.this,
-                        List_of_users.class);
+                        CurrentUsers.class);
                 startActivity(intro_to_Game);
             }
         });

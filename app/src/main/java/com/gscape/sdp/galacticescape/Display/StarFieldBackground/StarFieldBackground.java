@@ -2,6 +2,7 @@ package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableRow;
 
@@ -38,16 +39,21 @@ public class StarFieldBackground {
         this.maxMatrixColumn = sideChunkCountX * 2 + 1;
         this.maxMatrixRow = sideChunkCountY * 2 + 1;
 
+        Log.i("Background Values", centreChunkX + ", " + centreChunkY
+                                                + "\n" + sideChunkCountX + ", " + sideChunkCountY
+                                                + "\n" + maxMatrixColumn + ", " + maxMatrixRow);
+
         initGenerate();
     }
 
     private void initGenerate() {
         starFieldChunks = new StarFieldChunk[maxMatrixRow][maxMatrixColumn];
 
-        int currentChunkX = centreChunkX - (sideChunkCountX * 1000);
+        int topLeftChunkX = centreChunkX - (sideChunkCountX * 1000);
         int currentChunkY = centreChunkY + (sideChunkCountY * 1000);
 
         for (int i = 0; i < maxMatrixRow; i++) {
+            int currentChunkX = topLeftChunkX;
             for (int j = 0; j < maxMatrixColumn; j++) {
                 starFieldChunks[i][j] = new StarFieldChunk(currentChunkX, currentChunkY);
                 generateChunk(starFieldChunks[i][j]);
@@ -58,7 +64,7 @@ public class StarFieldBackground {
     }
 
     private void generateChunk(StarFieldChunk starFieldChunk) {
-        starFieldChunk.generateChunk(starForge, 100);
+        starFieldChunk.generateChunk(starForge, 50);
     }
 
     public StarFieldChunk[][] getStarFieldChunks() {
@@ -72,6 +78,7 @@ public class StarFieldBackground {
                 starFieldChunkViews[i][j] = new StarFieldChunkView(context, starFieldChunks[i][j]);
                 TableRow.LayoutParams chunkParams = new TableRow.LayoutParams(1000, 1000);
                 starFieldChunkViews[i][j].setLayoutParams(chunkParams);
+                starFieldChunkViews[i][j].setLayerType(View.LAYER_TYPE_SOFTWARE, null);
             }
         }
         return starFieldChunkViews;
@@ -167,7 +174,6 @@ public class StarFieldBackground {
                     generateChunk(newBackground[i][0]);
                     currentNewChunkY -= 1000;
                 }
-
                 starFieldChunks = newBackground;
                 return true;
             }

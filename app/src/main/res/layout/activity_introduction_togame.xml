@@ -22,9 +22,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/skip_intro_bt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp"
         android:text="Introduction"
         android:textColor="@android:color/white"
         android:textSize="30sp" />
@@ -38,6 +37,14 @@
         android:layout_marginEnd="13dp"
         android:background="@android:drawable/button_onoff_indicator_on"
         android:text="Skip" />
+
+    <VideoView
+        android:id="@+id/storyboard"
+        android:layout_width="500dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp" />
 
 
 </RelativeLayout>
