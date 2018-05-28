@@ -26,6 +26,11 @@ public class ObstacleManager {
     private double mass;
 
     private Vector location;
+    private double xMin;
+    private double xMax;
+
+    private double yMin;
+    private double yMax;
 
    // Vector location, Vector velocity, Vector acceleration
 
@@ -45,6 +50,14 @@ public class ObstacleManager {
         collisionRadius = 0;
 
 
+        xMin = 300;
+        xMax = 900;
+
+        yMin = 300;
+        yMax = 900;
+
+
+
     }
 
     private Vector randLoc()
@@ -54,20 +67,38 @@ public class ObstacleManager {
         return Vector.make2DPolar(randomMagnitude,randomAngle);
     }
 
-    private ArrayList<PhysicsObject> populateObstacles(Player player)
+//    private ArrayList<PhysicsObject> populateObstacles(Player player)
+//    {
+//       Vector playerLocation = player.getLocation();
+//        Vector actualLocation = getActualSpawnLocation(magnitudeMin + (magnitudeMax - magnitudeMin) * r.nextDouble(),
+//                angleMin + (angleMax - angleMin) * r.nextDouble()).add(playerLocation);
+//      // obstaclesList.add(new BlackHole())
+//        return obstaclesList;
+//    }
+
+
+    public double randomX()
     {
-       Vector playerLocation = player.getLocation();
-        Vector actualLocation = getActualSpawnLocation(magnitudeMin + (magnitudeMax - magnitudeMin) * r.nextDouble(),
-                angleMin + (angleMax - angleMin) * r.nextDouble()).add(playerLocation);
-      // obstaclesList.add(new BlackHole())
-        return obstaclesList;
+        int n = r.nextInt(2);
+        if (n==0)
+        {
+            n = -1;
+        }
+        return (xMin + (xMax - xMin) * r.nextDouble())*n;
     }
 
-    public Vector getActualSpawnLocation (double magnitude, double angle)
+    public double randomY()
     {
-        Vector polarLocation = Vector.make2DPolar(magnitude,angle);
-        Vector transformedLocation = polarLocation.transformRotate(20);
-        return transformedLocation;
+        return yMin + (yMax - yMin) * r.nextDouble();
     }
 
+    public Vector generateObstacleAtLoc(Player p)
+    {
+        Vector spawnLoc = Vector.make2D(randomX(),randomY());
+        Vector playerDirection = p.getVelocity();
+        double getTransformAngle= playerDirection.angleFromYOrigintoYPointAntiClock();
+        Vector rotated = spawnLoc.transformRotate(getTransformAngle);
+        Vector transformed = rotated.add(p.getLocation());
+        return transformed;
+    }
 }
