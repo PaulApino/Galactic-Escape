@@ -123,7 +123,7 @@ public class StarForge {
     }
 
     /**
-     *Generates a star from the given values.
+     * Generates a star from the given values.
      * @param starValues the values used to make a new star
      * @return returns a star with the given values.
      */
