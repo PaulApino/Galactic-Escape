@@ -1,6 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import com.gscape.sdp.galacticescape.Movement.Accelerometer;
 import com.gscape.sdp.galacticescape.Movement.TiltAcceleration;
 import com.gscape.sdp.galacticescape.Movement.TiltMovementRunnable;
 import com.gscape.sdp.galacticescape.R;
+import com.gscape.sdp.galacticescape.Submenu;
 
 import java.util.ArrayList;
 
@@ -189,5 +191,18 @@ public class GamePlayScreen extends Activity {
         }
 
         tiltMovement = new TiltMovementRunnable(new TiltAcceleration(physC, new Accelerometer(getApplicationContext())), physC, simulationState);
+    }
+    
+
+    /**
+     * Pause Menu created when back button is pushed during game play.
+     * method created by Aseni
+     */
+    @Override
+    public void onBackPressed() {
+        //Execute your code here
+        finish(); //closes intent so intent isn't running in the background
+        Intent subMenuIntent = new Intent(this, Submenu.class);
+        startActivity(subMenuIntent); //takes you to the pause menu intent.
     }
 }

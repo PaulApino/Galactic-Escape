@@ -30,6 +30,7 @@ public class Introduction_togame extends AppCompatActivity {
         skip_intro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent skipped = new Intent(Introduction_togame.this, User_name_selection.class );
                 startActivity(skipped);
             }
