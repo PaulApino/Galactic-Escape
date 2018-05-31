@@ -81,15 +81,6 @@ public class StarFieldBackgroundRunnable implements Runnable {
         for (int i = 0; i < starFieldChunkViews.length; i++) {
             for (int j = 0; j < starFieldChunkViews[i].length; j++) {
                 starFieldChunkViews[i][j].setNewChunk(chunks[i][j]);
-//                starFieldChunkViews[i][j].postInvalidate();
-//                final int iR = i;
-//                final int jR = j;
-//                container.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        starFieldChunkViews[iR][jR].invalidate();
-//                    }
-//                });
             }
         }
     }
