@@ -1,9 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 
 import com.gscape.sdp.galacticescape.Display.ActualGame.ScreenValues;
 import com.gscape.sdp.galacticescape.Display.ActualGame.SimulationState;

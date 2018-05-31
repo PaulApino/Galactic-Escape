@@ -1,7 +1,5 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
-import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
-
 import java.util.ArrayList;
 
 public class StarFieldChunk {
