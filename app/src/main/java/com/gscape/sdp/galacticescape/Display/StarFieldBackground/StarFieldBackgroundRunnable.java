@@ -31,11 +31,18 @@ public class StarFieldBackgroundRunnable implements Runnable {
     @Override
     public void run() {
         while(simulationState.isRunning() | simulationState.isResumed()) {
-            int distChunkCentX = (int)Math.ceil(screenValues.getScreenCentreLocation().getX()) - (starFieldBackground.getCentreChunkX() + 500);
-            int distChunkCentY = (int)Math.ceil(screenValues.getScreenCentreLocation().getY()) - (starFieldBackground.getCentreChunkY() + 500);
+            int distChunkCentX = (int)screenValues.getScreenCentreLocation().getX() - (starFieldBackground.getCentreChunkX() + 500);
+            int distChunkCentY = (int)screenValues.getScreenCentreLocation().getY() - (starFieldBackground.getCentreChunkY() + 500);
 
-            int containerDistX = (1000 * -(starFieldBackground.getSideChunkCountX() + 1)) + (int)(screenValues.getScreenSize().getX() / 2) - distChunkCentX;
-            int containerDistY = (1000 * -(starFieldBackground.getSideChunkCountY() + 1)) + (int)(screenValues.getScreenSize().getY() / 2) - distChunkCentY;
+            int newCentreDirection = getNewChunkDirection(distChunkCentX, distChunkCentY);
+
+            if (newCentreDirection != NO_DIRECTION) {
+                starFieldBackground.backgroundUpdate(newCentreDirection);
+                setChunkViews();
+            }
+
+            int containerDistX = ((int)(screenValues.getScreenSize().getX() / 2) - distChunkCentX) - (500 + (1000 * starFieldBackground.getSideChunkCountX()));
+            int containerDistY = ((int)(screenValues.getScreenSize().getY() / 2) - distChunkCentY) - (500 + (1000 * starFieldBackground.getSideChunkCountY()));
 
             final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)container.getLayoutParams();
             layoutParams.leftMargin = containerDistX;
@@ -48,15 +55,8 @@ public class StarFieldBackgroundRunnable implements Runnable {
                 }
             });
 
-            int newCentreDirection = getNewChunkDirection(distChunkCentX, distChunkCentY);
-
-            if (newCentreDirection != NO_DIRECTION) {
-                starFieldBackground.backgroundUpdate(newCentreDirection);
-                setChunkViews();
-            }
-
             try {
-                Thread.sleep(20);
+                Thread.sleep(17);
             } catch (InterruptedException e) {}
         }
     }
@@ -77,17 +77,26 @@ public class StarFieldBackgroundRunnable implements Runnable {
     }
 
     private void setChunkViews () {
-        StarFieldChunk[][] starFieldChunks = starFieldBackground.getStarFieldChunks();
+        StarFieldChunk[][] chunks = starFieldBackground.getStarFieldChunks();
         for (int i = 0; i < starFieldChunkViews.length; i++) {
             for (int j = 0; j < starFieldChunkViews[i].length; j++) {
-                starFieldChunkViews[i][j].setNewChunk(starFieldChunks[i][j]);
+                starFieldChunkViews[i][j].setNewChunk(chunks[i][j]);
+//                starFieldChunkViews[i][j].postInvalidate();
+//                final int iR = i;
+//                final int jR = j;
+//                container.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        starFieldChunkViews[iR][jR].invalidate();
+//                    }
+//                });
             }
         }
     }
 
     private int checkPlaneDisplacement (int displacement) {
-        if (displacement > 1500) return GREATER_POSITIVE;
-        else if (displacement < -1500) return GREATER_NEGATIVE;
+        if (displacement > 1000) return GREATER_POSITIVE;
+        else if (displacement < -1000) return GREATER_NEGATIVE;
         else return NO_DIRECTION;
     }
 

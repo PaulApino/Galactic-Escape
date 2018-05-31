@@ -27,18 +27,18 @@ public class GravitationCalculator {
      * @param objects Array of PhysicsObject. (array must contain 2 objects)
      */
     public void simulate (PhysicsObject [] objects) {
-        if (objects.length < 2) throw new IllegalArgumentException("Not enough objects to simulate gravity");
-
-        //Calculates gravity effect for each PhysicsObject
-        int tempIndex = 1;
-        for (PhysicsObject currentObject : objects) {
-            for (int i = tempIndex; i < objects.length; i++) {
-                double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
-                double force = gravityConstant * (currentObject.getMass() * objects[i].getMass()) / (distance * distance);     //force experienced by the two PhysicsObject
-                currentObject.setVelocity(currentObject.getVelocity().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
-                objects[i].setVelocity(objects[i].getVelocity().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
+        if (objects.length >= 2) {
+            //Calculates gravity effect for each PhysicsObject
+            int tempIndex = 1;
+            for (PhysicsObject currentObject : objects) {
+                for (int i = tempIndex; i < objects.length; i++) {
+                    double distance = currentObject.getLocation().minus(objects[i].getLocation()).getMagnitude();       //distance between the two PhysicsObject
+                    double force = gravityConstant * (currentObject.getMass() * objects[i].getMass()) / (distance * distance);     //force experienced by the two PhysicsObject
+                    currentObject.setVelocity(currentObject.getVelocity().add(objects[i].getLocation().minus(currentObject.getLocation()).projectWith(force / currentObject.getMass())));       //adds the acceleration to currentObject
+                    objects[i].setVelocity(objects[i].getVelocity().add(currentObject.getLocation().minus(objects[i].getLocation()).projectWith(force / objects[i].getMass())));      //adds the acceleration to other object
+                }
+                tempIndex++;
             }
-            tempIndex++;
         }
     }
 
