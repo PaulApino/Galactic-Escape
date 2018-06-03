@@ -16,6 +16,9 @@ public class MainMenu extends AppCompatActivity {
     private Button quit_game;
     private Button con;
 
+
+
+    //my method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +56,15 @@ public class MainMenu extends AppCompatActivity {
         });
 
 
-//        con.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intro_to_Game = new Intent(MainMenu.this,
-//                        CurrentUsers.class);
-//                startActivity(intro_to_Game);
-//            }
-//        });
+        con.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intro_to_Game = new Intent(MainMenu.this,
+                        CurrentUsers.class);
+                startActivity(intro_to_Game);
+            }
+        });
+
 
         quit_game = findViewById(R.id.quitID);
         quit_game.setOnClickListener(new View.OnClickListener() {

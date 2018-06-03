@@ -8,5 +8,4 @@ public class Player extends PhysicsObject {
         super(mass, collisionRadius, location, velocity, acceleration);
     }
 
-
 }
