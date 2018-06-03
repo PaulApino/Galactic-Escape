@@ -49,7 +49,7 @@ public class Introduction_togame extends AppCompatActivity {
             @Override
             public void onPageSelected(int position)
             {
-                Toast.makeText(Introduction_togame.this, "page " + (position + 1), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Introduction_togame.this, "page " + (position + 1), Toast.LENGTH_SHORT).show();
 
 
 
