@@ -15,6 +15,7 @@ public class MainMenu extends AppCompatActivity {
     private Button start_new_game;
     private Button quit_game;
     private Button con;
+    private Button controls;
 
 
 
@@ -32,6 +33,7 @@ public class MainMenu extends AppCompatActivity {
         start_new_game = findViewById(R.id.new_gameID);
 
         menuContainer = findViewById(R.id.main_menu_container);
+        controls = findViewById(R.id.controlsBT);
 
         con = findViewById(R.id.continueID);
 
@@ -62,6 +64,16 @@ public class MainMenu extends AppCompatActivity {
                 Intent intro_to_Game = new Intent(MainMenu.this,
                         CurrentUsers.class);
                 startActivity(intro_to_Game);
+            }
+        });
+
+        controls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent controls = new Intent(MainMenu.this,
+                        ControlPopup.class);
+                startActivity(controls);
+
             }
         });
 
