@@ -1,9 +1,8 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
 import android.content.Context;
-import android.util.Log;
+
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TableRow;
 
 import com.gscape.sdp.galacticescape.Display.ActualGame.ScreenValues;
@@ -38,10 +37,6 @@ public class StarFieldBackground {
         this.sideChunkCountY = (int)Math.round(screenValues.getScreenSize().getY() / 1000);
         this.maxMatrixColumn = sideChunkCountX * 2 + 1;
         this.maxMatrixRow = sideChunkCountY * 2 + 1;
-
-        Log.i("Background Values", centreChunkX + ", " + centreChunkY
-                                                + "\n" + sideChunkCountX + ", " + sideChunkCountY
-                                                + "\n" + maxMatrixColumn + ", " + maxMatrixRow);
 
         initGenerate();
     }
@@ -78,7 +73,6 @@ public class StarFieldBackground {
                 starFieldChunkViews[i][j] = new StarFieldChunkView(context, starFieldChunks[i][j]);
                 TableRow.LayoutParams chunkParams = new TableRow.LayoutParams(1000, 1000);
                 starFieldChunkViews[i][j].setLayoutParams(chunkParams);
-                starFieldChunkViews[i][j].setLayerType(View.LAYER_TYPE_SOFTWARE, null);
             }
         }
         return starFieldChunkViews;
