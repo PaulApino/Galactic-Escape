@@ -16,6 +16,7 @@ public class MainMenu extends AppCompatActivity {
     private Button quit_game;
     private Button con;
     private Button controls;
+    private Button scorebutton;
 
 
 
@@ -34,6 +35,8 @@ public class MainMenu extends AppCompatActivity {
 
         menuContainer = findViewById(R.id.main_menu_container);
         controls = findViewById(R.id.controlsBT);
+
+        scorebutton = findViewById(R.id.scoresBt);
 
         con = findViewById(R.id.continueID);
 
@@ -73,7 +76,16 @@ public class MainMenu extends AppCompatActivity {
                 Intent controls = new Intent(MainMenu.this,
                         ControlPopup.class);
                 startActivity(controls);
+            }
+        });
 
+
+        scorebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent scores = new Intent(MainMenu.this,
+                        ScoreBoard.class);
+                startActivity(scores);
             }
         });
 

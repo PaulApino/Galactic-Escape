@@ -54,12 +54,12 @@
         app:layout_constraintTop_toBottomOf="@+id/new_gameID" />
 
     <Button
-        android:id="@+id/highscoresID"
+        android:id="@+id/scoresBt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/button_onoff_indicator_on"
-        android:text="High Scores"
+        android:text="Score Board"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/continueID" />
@@ -75,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/highscoresID"
+        app:layout_constraintTop_toBottomOf="@+id/scoresBt"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button

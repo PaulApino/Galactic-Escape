@@ -16,16 +16,6 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/solar" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/skip_intro_bt"
-        android:layout_centerHorizontal="true"
-        android:text="Introduction"
-        android:textColor="@android:color/white"
-        android:textSize="30sp" />
-
     <Button
         android:id="@+id/skip_intro_bt"
         android:layout_width="wrap_content"
@@ -38,11 +28,10 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_layout"
-        android:layout_width="500dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="31dp"
+        android:layout_alignParentStart="true"
         android:visibility="visible" />
 
 
