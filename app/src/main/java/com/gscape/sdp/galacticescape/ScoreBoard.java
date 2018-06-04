@@ -70,7 +70,8 @@ public class ScoreBoard extends AppCompatActivity {
                     usersScores.add(u.getScore() + "                      " + u.getUsername());
                     currentUsersScore.setAdapter(arrayAdapter);
                 }
-                Collections.sort(usersScores, Collections.<String>reverseOrder());
+                sorting(usersScores);
+
             }
 
             @Override
@@ -145,6 +146,13 @@ public class ScoreBoard extends AppCompatActivity {
         });
 
     }
+
+
+    public void sorting(ArrayList array){
+        Collections.sort(array, Collections.<String>reverseOrder());
+    };
+
+
 
 
 

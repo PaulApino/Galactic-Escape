@@ -27,7 +27,7 @@ public class CurrentUsers extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRootReference = firebaseDatabase.getReference();
     ListView currentUsers;
-    private  ArrayList<String> users = new ArrayList<>();
+    public  ArrayList<String> users = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
