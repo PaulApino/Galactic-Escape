@@ -15,6 +15,7 @@ public class PlanetEarthLike extends Planet{
      */
     public PlanetEarthLike(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
         super(mass, collisionRadius, location, velocity, acceleration);
+
     }
 
 

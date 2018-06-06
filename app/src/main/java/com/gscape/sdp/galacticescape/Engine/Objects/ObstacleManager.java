@@ -1,6 +1,8 @@
 package com.gscape.sdp.galacticescape.Engine.Objects;
 
 import com.gscape.sdp.galacticescape.Engine.Objects.Obstacle.Obstacle;
+import com.gscape.sdp.galacticescape.Engine.Objects.Obstacle.Planet.Planet;
+import com.gscape.sdp.galacticescape.Engine.Objects.Obstacle.Planet.PlanetEarthLike;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
 import java.util.ArrayList;
@@ -11,11 +13,6 @@ public class ObstacleManager {
 
     private ArrayList obstaclesList;
     private Random r;
-
-    private double magnitudeMax;
-    private double magnitudeMin;
-    private double angleMax;
-    private double angleMin;
 
     private double collisionRadiusMin;
     private double collisionRadiusMax;
@@ -40,15 +37,9 @@ public class ObstacleManager {
         obstaclesList = new ArrayList<Obstacle>();
         r = new Random();
 
-        magnitudeMax = 5000;//Unit is in pixels(1 pixel represents 1 Megametre)
-        magnitudeMin = 2000;
-        angleMax = 180;//Unit is in degrees
-        angleMin = 0;
-
         collisionRadiusMin = 0;
         collisionRadiusMax = 0;
         collisionRadius = 0;
-
 
         xMin = 300;
         xMax = 900;
@@ -56,26 +47,17 @@ public class ObstacleManager {
         yMin = 300;
         yMax = 900;
 
+//        r = new Random();
+//        collisionRadiusMin = 10;
+//        collisionRadiusMax = 10;
+//        massMin = 10;
+//        massMax = 10;
+//
+//        collisionRadius = (collisionRadiusMin + (collisionRadiusMax - collisionRadiusMin) * r.nextDouble());
+//        mass = (massMin + (massMax - massMin) * r.nextDouble());
 
 
     }
-
-    private Vector randLoc()
-    {
-        double randomMagnitude = magnitudeMin + (magnitudeMax - magnitudeMin) * r.nextDouble();
-        double randomAngle = angleMin + (angleMax - angleMin) * r.nextDouble();
-        return Vector.make2DPolar(randomMagnitude,randomAngle);
-    }
-
-//    private ArrayList<PhysicsObject> populateObstacles(Player player)
-//    {
-//       Vector playerLocation = player.getLocation();
-//        Vector actualLocation = getActualSpawnLocation(magnitudeMin + (magnitudeMax - magnitudeMin) * r.nextDouble(),
-//                angleMin + (angleMax - angleMin) * r.nextDouble()).add(playerLocation);
-//      // obstaclesList.add(new BlackHole())
-//        return obstaclesList;
-//    }
-
 
     public double randomX()
     {
@@ -100,5 +82,31 @@ public class ObstacleManager {
         Vector rotated = spawnLoc.transformRotate(getTransformAngle);
         Vector transformed = rotated.add(p.getLocation());
         return transformed;
+    }
+
+    public Obstacle generateObstacle(Player p)
+    {
+        int pickObstacle = r.nextInt(8)+1;
+
+        if (pickObstacle == 1)
+        {
+            massMax = 400;
+            massMin = 100;
+            double earthLikeMass = (collisionRadiusMin + (collisionRadiusMax - collisionRadiusMin) * r.nextDouble());
+
+            collisionRadiusMax = 600;
+            collisionRadiusMin = 50;
+            double collradius = (collisionRadiusMin + (collisionRadiusMax - collisionRadiusMin) * r.nextDouble());
+
+            Vector earthLikeLocation = generateObstacleAtLoc(p);
+
+            Vector v = Vector.make2DPolar(, )
+            Vector a = Vector.make2D(2, 3);
+
+           return new PlanetEarthLike(earthLikeMass,collradius,earthLikeLocation,v,a);
+        }
+
+    else return null;
+
     }
 }
