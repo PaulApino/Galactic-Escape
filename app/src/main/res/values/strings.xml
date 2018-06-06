@@ -9,4 +9,13 @@
     <string name="title_activity_game_play_screen">GamePlayScreen</string>
 
     <string name="title_activity_main_menu">MainMenu</string>
+    <string name="swipe_left_or_right_to_navigate_between_pages">Swipe Left or Right to navigate between pages</string>
+    <string name="page_one">Chapter One</string>
+    <string name="page_two">Chapter Two</string>
+
+    <string name="page_three">Chapter Three</string>
+
+    <string name="page_four">Chapter Four</string>
+
+    <string name="lets_get_going"> Lets Get Going! </string>
 </resources>

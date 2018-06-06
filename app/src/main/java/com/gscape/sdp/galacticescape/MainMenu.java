@@ -15,7 +15,12 @@ public class MainMenu extends AppCompatActivity {
     private Button start_new_game;
     private Button quit_game;
     private Button con;
+    private Button controls;
+    private Button scorebutton;
 
+
+
+    //my method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,9 @@ public class MainMenu extends AppCompatActivity {
         start_new_game = findViewById(R.id.new_gameID);
 
         menuContainer = findViewById(R.id.main_menu_container);
+        controls = findViewById(R.id.controlsBT);
+
+        scorebutton = findViewById(R.id.scoresBt);
 
         con = findViewById(R.id.continueID);
 
@@ -61,6 +69,26 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(intro_to_Game);
             }
         });
+
+        controls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent controls = new Intent(MainMenu.this,
+                        ControlPopup.class);
+                startActivity(controls);
+            }
+        });
+
+
+        scorebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent scores = new Intent(MainMenu.this,
+                        ScoreBoard.class);
+                startActivity(scores);
+            }
+        });
+
 
         quit_game = findViewById(R.id.quitID);
         quit_game.setOnClickListener(new View.OnClickListener() {

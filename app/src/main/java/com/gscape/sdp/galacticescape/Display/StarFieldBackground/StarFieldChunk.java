@@ -1,7 +1,5 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
-import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
-
 import java.util.ArrayList;
 
 public class StarFieldChunk {
@@ -10,14 +8,10 @@ public class StarFieldChunk {
     private final int xLoc;
     private final int yLoc;
 
-    private boolean generated;
-
     public StarFieldChunk(int xLoc, int yLoc) {
         this.xLoc = xLoc;
         this.yLoc = yLoc;
         stars = new ArrayList<>(100);
-
-        generated = false;
     }
 
     public int getxLoc() {
@@ -38,10 +32,5 @@ public class StarFieldChunk {
 
     public void generateChunk (StarForge theForge, int starCount) {
         theForge.generateStars(this, starCount);
-        generated = true;
-    }
-
-    public boolean isGenerated() {
-        return generated;
     }
 }

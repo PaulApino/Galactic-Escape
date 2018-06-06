@@ -5,8 +5,6 @@ import android.graphics.Paint;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
 
-import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
-
 public class BackgroundStar {
 
 
