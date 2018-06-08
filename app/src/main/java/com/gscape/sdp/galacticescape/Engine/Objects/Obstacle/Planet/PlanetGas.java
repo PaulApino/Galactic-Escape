@@ -1,6 +1,9 @@
 package com.gscape.sdp.galacticescape.Engine.Objects.Obstacle.Planet;
-
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
+
+/*Creates a Gas Planet object with attributes that will allow movement based on realistic gravity in space
+@author Michelle Extross
+*/
 
 public class PlanetGas extends Planet {
     /**

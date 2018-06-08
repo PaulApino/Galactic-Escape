@@ -6,6 +6,10 @@ import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
 import java.util.Random;
 
+/*Creates a planet object with attributes that will allow movement based on realistic gravity in space
+@author Michelle Extross
+*/
+
 public class Planet extends Obstacle{
 
     /**
