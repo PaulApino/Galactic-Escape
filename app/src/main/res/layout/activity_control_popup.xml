@@ -5,32 +5,19 @@
 
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="35dp"
-        android:text="Tilt upwards to blast off!"
-        android:textSize="18sp" />
-
-    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageView8"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="33dp"
-        android:layout_marginEnd="23dp"
-        android:text="Tilt Left or Right to move through space"
+        android:layout_marginBottom="31dp"
+        android:text="Tilt Left, Right, Upwards, and Downwards to move through space"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/returnMainmenu"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
-        android:layout_alignBottom="@+id/textView5"
         android:layout_alignEnd="@+id/textView6"
         android:background="@android:drawable/button_onoff_indicator_on"
         android:text="Main Menu"
