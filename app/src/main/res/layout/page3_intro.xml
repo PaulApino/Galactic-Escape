@@ -8,9 +8,9 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
 
-        android:text="@string/page_three"
         android:background="@drawable/stars"
         android:backgroundTintMode="multiply"
+        android:text="Game Elements"
         android:textColor="@android:color/white"
         android:textSize="30sp" />
 
