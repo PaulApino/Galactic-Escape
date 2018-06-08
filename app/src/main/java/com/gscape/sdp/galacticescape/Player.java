@@ -1,6 +1,6 @@
 package com.gscape.sdp.galacticescape;
 
-public class User {
+public class Player {
     private String Username;
     private String achievements;
     private String currentPos;
@@ -50,7 +50,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Player{" +
                 "Username='" + Username + "\n" +
                 ", achievements='" + achievements + "\n" +
                 ", currentPos='" + currentPos + "\n" +

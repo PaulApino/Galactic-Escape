@@ -50,7 +50,7 @@ public class MainMenu extends AppCompatActivity {
                  */
 
                 Intent intro_to_Game = new Intent(MainMenu.this,
-                        Introduction_togame.class);
+                        Introduction.class);
                 /**
                  * intro_to_Game.putExtra("",""); <-- if you need to carry any
                  data into the next intent class.
@@ -65,7 +65,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intro_to_Game = new Intent(MainMenu.this,
-                        CurrentUsers.class);
+                        CurrentPlayer.class);
                 startActivity(intro_to_Game);
             }
         });

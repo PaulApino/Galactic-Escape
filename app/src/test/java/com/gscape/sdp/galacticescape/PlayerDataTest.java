@@ -1,17 +1,12 @@
 package com.gscape.sdp.galacticescape;
 
-import android.test.suitebuilder.TestSuiteBuilder;
 import org.junit.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class UserDataTest {
+public class PlayerDataTest {
 
     /*
         Written by Aseni, checking to see if all user data are of Type String, so that it can
@@ -19,7 +14,7 @@ public class UserDataTest {
      */
     @Test
     public void UserInstancesAllStrings(){
-        User u = new User();
+        Player u = new Player();
         u.setScore("2");
         u.setLives("1");
         u.setUsername("name");
