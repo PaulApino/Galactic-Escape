@@ -22,7 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
-        android:text="Current Users"
+        android:text="Current Players"
         android:textColor="@android:color/background_light"
         android:textSize="30sp" />
 </RelativeLayout>

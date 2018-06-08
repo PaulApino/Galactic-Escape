@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Create New User"
+        android:text="Create New Player"
         android:textColor="@android:color/white"
         android:textSize="30sp" />
 
