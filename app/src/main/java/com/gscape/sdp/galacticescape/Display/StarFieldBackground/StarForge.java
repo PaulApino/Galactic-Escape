@@ -18,26 +18,7 @@ public class StarForge {
      */
     public StarForge (int seed) {
         int tempSeed = Math.abs(seed);
-        String s_tempSeed = Integer.toString(tempSeed);
-        //if seed is 1 digit long, append three 0 to make 4 digit seed.
-        if (tempSeed < 10) {
-            s_tempSeed = s_tempSeed.concat("000");
-        }
-
-        //if seed is 2 digit long, append two 0 to make 3 digit seed.
-        else if (tempSeed < 100) {
-            s_tempSeed = s_tempSeed.concat("00");
-        }
-
-        //if seed is 3 digit long, append a 0 to make 4 digit seed.
-        else if (tempSeed < 1000) {
-            s_tempSeed = s_tempSeed.concat("0");
-        }
-
-        //if seed is greater or equal to 4 digits, take the first 4 numbers as seed.
-        else {
-            s_tempSeed = s_tempSeed.substring(0,4);
-        }
+        String s_tempSeed = fixNumber(tempSeed);
 
         seedStart = Integer.parseInt(s_tempSeed.substring(0, 2));   //first 2 digits of the seed.
         seedEnd = Integer.parseInt(s_tempSeed.substring(2, 4));     //last 2 digits of the seed.
@@ -54,7 +35,7 @@ public class StarForge {
         //3 values required to generate a star. [0] = xLocation, [1] = yLocation, [2] = radius and color.
         int[] starValues = new int[3];
         //two numbers for the Fibonacci sequence, makes the initial values base on chunk constants.
-        int[] sequenceValues = initializeChunk(chunk.getxLoc(), chunk.getyLoc());
+        int[] sequenceValues = initializeChunk(chunk.getXLoc(), chunk.getYLoc());
         //a generated star value.
         int currentStarValue;
 
@@ -88,14 +69,16 @@ public class StarForge {
      */
     private int[] initializeChunk (int xLoc, int yLoc) {
         //first fibonacci number.
+        String startCentre = fixNumber(Math.abs(xLoc));
         int startNum = seedStart
                 //the x location of the chunk so the generator always produces the same stars for this chunk.
-                + Integer.parseInt(Integer.toString(Math.abs(xLoc) + 1000).substring(0, 2));
+                + Integer.parseInt(startCentre.substring(startCentre.length() - 4, startCentre.length() - 2));
 
         //second fibonacci number.
+        String endCentre = fixNumber(Math.abs(yLoc));
         int endNum = seedEnd
                 //the y location of the chunk so the generator always produces the same stars for this chunk.
-                + Integer.parseInt(Integer.toString(Math.abs(yLoc) + 1000).substring(0, 2));
+                + Integer.parseInt(endCentre.substring(endCentre.length() - 4, endCentre.length() - 2));
 
         //array of two fibonacci numbers.
         return new int[]{startNum, endNum};
@@ -133,5 +116,27 @@ public class StarForge {
         //uses the 3rd value for choosing 3 colors ranging from 0 - 2;
         int colour = starValues[2] % 3;
         return new BackgroundStar(starValues[0], starValues[1], radius, colour);
+    }
+
+    private String fixNumber (int aNumber) {
+        String sNumber = Integer.toString(aNumber);
+        if (aNumber < 10) {
+            return sNumber.concat("000");
+        }
+
+        //if seed is 2 digit long, append two 0 to make 3 digit seed.
+        else if (aNumber < 100) {
+            return sNumber.concat("00");
+        }
+
+        //if seed is 3 digit long, append a 0 to make 4 digit seed.
+        else if (aNumber < 1000) {
+            return sNumber.concat("0");
+        }
+
+        //if seed is greater or equal to 4 digits, take the first 4 numbers as seed.
+        else {
+            return sNumber.substring(sNumber.length() - 4, sNumber.length());
+        }
     }
 }

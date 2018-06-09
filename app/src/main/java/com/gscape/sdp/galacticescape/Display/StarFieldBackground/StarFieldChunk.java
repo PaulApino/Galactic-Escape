@@ -14,11 +14,11 @@ public class StarFieldChunk {
         stars = new ArrayList<>(100);
     }
 
-    public int getxLoc() {
+    public int getXLoc() {
         return xLoc;
     }
 
-    public int getyLoc() {
+    public int getYLoc() {
         return yLoc;
     }
 
