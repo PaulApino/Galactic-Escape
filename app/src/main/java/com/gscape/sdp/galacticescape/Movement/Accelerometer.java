@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 import com.gscape.sdp.galacticescape.R;
-
+/**
+ * Set the vector values used in the game to the information provided by the sensor.
+ * @author Michelle Extross
+ */
 
 public class Accelerometer implements SensorEventListener {
 
@@ -48,6 +51,4 @@ public class Accelerometer implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         //Will not be used
     }
-
-
 }

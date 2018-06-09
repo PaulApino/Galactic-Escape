@@ -2,6 +2,10 @@ package com.gscape.sdp.galacticescape.Engine.Objects.Obstacle;
 
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
+/*Creates a Meteor object with attributes that will allow movement based on realistic gravity in space
+@author Michelle Extross
+*/
+
 public class Meteor extends Obstacle {
     /**
      * Makes a Meteor from the given values.

@@ -3,6 +3,8 @@ package com.gscape.sdp.galacticescape.Engine.Objects.Obstacle;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
+import java.util.Random;
+
 public class Obstacle extends PhysicsObject {
 
     /**
@@ -14,9 +16,8 @@ public class Obstacle extends PhysicsObject {
      * @param velocity        the velocity of the object.
      * @param acceleration    the acceleration of the object.
      */
+
     protected Obstacle(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
         super(mass, collisionRadius, location, velocity, acceleration);
     }
-
-
 }
