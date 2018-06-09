@@ -81,9 +81,9 @@ public class StarFieldTest extends AppCompatActivity {
 
         starForge = new StarForge(-384675768);
 
-        starFieldBackground = new StarFieldBackground(starForge, screenValues);
+        starFieldBackground = new StarFieldBackground(getApplicationContext(), starForge, screenValues);
 
-        chunkViews = starFieldBackground.getStarFieldChunkViews(getApplicationContext());
+        chunkViews = starFieldBackground.getStarFieldChunkViews();
 
         setChunks();
     }

@@ -15,6 +15,8 @@ public class StarFieldBackground {
     public final static int SOUTH_EAST = 6;
     public final static int SOUTH_WEST = 7;
 
+    private final Context context;
+    private final StarFieldChunkView[][] starFieldChunkViews;
     private StarFieldChunk[][] starFieldChunks;
     private final StarForge starForge;
 
@@ -26,7 +28,7 @@ public class StarFieldBackground {
     private final int sideChunkCountX;
     private final int sideChunkCountY;
 
-    public StarFieldBackground(StarForge starForge, ScreenValues screenValues) {
+    public StarFieldBackground(Context context, StarForge starForge, ScreenValues screenValues) {
         this.starForge = starForge;
         this.centreChunkX = ((int)(screenValues.getScreenCentreLocation().getX() / 1000)) * 1000;
         this.centreChunkY = ((int)(screenValues.getScreenCentreLocation().getY() / 1000)) * 1000;
@@ -34,6 +36,9 @@ public class StarFieldBackground {
         this.sideChunkCountY = (int)Math.round(screenValues.getScreenSize().getY() / 1000);
         this.maxMatrixColumn = sideChunkCountX * 2 + 1;
         this.maxMatrixRow = sideChunkCountY * 2 + 1;
+
+        this.context = context;
+        starFieldChunkViews = new StarFieldChunkView[maxMatrixRow][maxMatrixColumn];
 
         initGenerate();
     }
@@ -53,6 +58,12 @@ public class StarFieldBackground {
             }
             currentChunkY -= 1000;
         }
+
+        for (int i = 0; i < maxMatrixRow; i++) {
+            for (int j = 0; j < maxMatrixColumn; j++) {
+                starFieldChunkViews[i][j] = new StarFieldChunkView(context, starFieldChunks[i][j]);
+            }
+        }
     }
 
     private void generateChunk(StarFieldChunk starFieldChunk) {
@@ -63,15 +74,19 @@ public class StarFieldBackground {
         return starFieldChunks;
     }
 
-    public StarFieldChunkView[][] getStarFieldChunkViews (Context context) {
-        StarFieldChunkView[][] starFieldChunkViews = new StarFieldChunkView[maxMatrixRow][maxMatrixColumn];
-        for (int i = 0; i < maxMatrixRow; i++) {
-            for (int j = 0; j < maxMatrixColumn; j++) {
-                starFieldChunkViews[i][j] = new StarFieldChunkView(context, starFieldChunks[i][j]);
-            }
-        }
+    public StarFieldChunkView[][] getStarFieldChunkViews () {
         return starFieldChunkViews;
     }
+
+    public void updateStarFieldChunkViews () {
+        for (int i = 0; i < maxMatrixRow; i++) {
+            for (int j = 0; j < maxMatrixColumn; j++) {
+                starFieldChunkViews[i][j].setNewChunk(starFieldChunks[i][j]);
+                starFieldChunkViews[i][j].postInvalidate();
+            }
+        }
+    }
+
 
     public int getCentreChunkX() {
         return centreChunkX;
