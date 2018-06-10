@@ -4,17 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Introduction_togame">
+    android:background="@drawable/stars"
+    tools:context=".Introduction">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/solar" />
 
     <Button
         android:id="@+id/skip_intro_bt"
@@ -32,6 +24,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:background="@drawable/stars"
         android:visibility="visible" />
 
 

@@ -22,7 +22,7 @@ import com.gscape.sdp.galacticescape.Display.ActualGame.GamePlayScreen;
 
 import java.util.ArrayList;
 
-public class CurrentUsers extends AppCompatActivity {
+public class CurrentPlayer extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRootReference = firebaseDatabase.getReference();
@@ -32,10 +32,10 @@ public class CurrentUsers extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_of_users);
+        setContentView(R.layout.activity_list_of_players);
 
         currentUsers = (ListView) findViewById(R.id.list_of_usersListView);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CurrentUsers.this, android.R.layout.simple_list_item_1, users);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CurrentPlayer.this, android.R.layout.simple_list_item_1, users);
         currentUsers.setAdapter(arrayAdapter);
 
         mRootReference.addValueEventListener(new ValueEventListener() {
@@ -43,7 +43,7 @@ public class CurrentUsers extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 for (DataSnapshot child : children) {
-                    User u = child.getValue(User.class);
+                    Player u = child.getValue(Player.class);
                     users.add(child.getKey());
                     currentUsers.setAdapter(arrayAdapter);
 
@@ -59,7 +59,7 @@ public class CurrentUsers extends AppCompatActivity {
 
         // Create an ArrayAdapter from List
         final ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>
-                (CurrentUsers.this, android.R.layout.simple_list_item_1, users){
+                (CurrentPlayer.this, android.R.layout.simple_list_item_1, users){
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 /// Get the Item from ListView
@@ -89,10 +89,10 @@ public class CurrentUsers extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        Intent i=new Intent(CurrentUsers.this, GamePlayScreen.class);
+                        Intent i=new Intent(CurrentPlayer.this, GamePlayScreen.class);
                         startActivity(i);
                     }
-                }, 5000); Toast.makeText(CurrentUsers.this, "Resuming "+  selectedUser[0] + " Game Play please wait..",
+                }, 5000); Toast.makeText(CurrentPlayer.this, "Resuming "+  selectedUser[0] + " Game Play please wait..",
                         Toast.LENGTH_LONG).show();
             }
         });

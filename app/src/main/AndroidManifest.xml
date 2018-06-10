@@ -17,11 +17,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Introduction_togame"
+            android:name=".Introduction"
             android:configChanges="orientation|keyboard|screenSize"
             android:label="@string/game_introduction"
             android:screenOrientation="landscape" />
@@ -31,31 +32,44 @@
             android:label="@string/title_activity_game_play_screen"
             android:screenOrientation="landscape">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".User_name_selection" />
-        <activity android:name=".CurrentUsers" />
-        <activity android:name=".Submenu" />
+        <activity android:name=".Playerselection"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            />
+        <activity android:name=".CurrentPlayer"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".Submenu"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".Display.TestDisplay.StarFieldTest"
             android:configChanges="orientation|keyboard|screenSize"
             android:label="StarFieldTest"
             android:screenOrientation="landscape">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".ControlPopup" />
-        <activity android:name=".ScoreBoard"></activity>
+        <activity android:name=".ControlPopup"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            />
+        <activity android:name=".ScoreBoard"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

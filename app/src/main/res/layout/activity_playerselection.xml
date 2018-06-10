@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User_name_selection">
+    tools:context=".Playerselection">
 
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Create New User"
+        android:text="Create New Player"
         android:textColor="@android:color/white"
         android:textSize="30sp" />
 
@@ -53,7 +53,7 @@
         android:elevation="24dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Take Off!"
-        android:textColor="?attr/colorError"
+        android:textColor="@android:color/holo_orange_dark"
         android:textStyle="bold" />
 
 
