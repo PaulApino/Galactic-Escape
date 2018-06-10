@@ -95,6 +95,10 @@ public class ObstacleManager {
         return (massMin + (massMax - massMin) * r.nextDouble());
     }
 
+    /**
+     * Calculates the gravitational reaction between all objects based on Newton's Law of Gravitation.
+     * @param p An instance of a player
+     */
     public Obstacle generateObstacle(Player p)
     {
         int pickObstacle = r.nextInt(7)+1;
