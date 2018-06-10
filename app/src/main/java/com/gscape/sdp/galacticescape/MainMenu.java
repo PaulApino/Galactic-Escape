@@ -34,9 +34,9 @@ public class MainMenu extends AppCompatActivity {
         start_new_game = findViewById(R.id.new_gameID);
 
         menuContainer = findViewById(R.id.main_menu_container);
-        controls = findViewById(R.id.controlsBT);
-
-        scorebutton = findViewById(R.id.scoresBt);
+//        controls = findViewById(R.id.controlsBT);
+//
+//        scorebutton = findViewById(R.id.scoresBt);
 
         con = findViewById(R.id.continueID);
 

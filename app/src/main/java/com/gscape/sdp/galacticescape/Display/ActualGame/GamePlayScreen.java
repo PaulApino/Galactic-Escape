@@ -91,12 +91,12 @@ public class GamePlayScreen extends Activity {
         Thread backSim = new Thread(simulator);
         Thread frontSim = new Thread(simulationDisplayer);
         Thread starSim = new Thread(starFieldBackgroundRunnable);
-//        Thread tiltSimulation = new Thread(tiltMovement);
+        Thread tiltSimulation = new Thread(tiltMovement);
 
         backSim.start();
         frontSim.start();
         starSim.start();
-//        tiltSimulation.start();
+        tiltSimulation.start();
     }
 
     private void init() {
@@ -117,8 +117,8 @@ public class GamePlayScreen extends Activity {
                 Vector.make2D(0, 0));
 
         physicsObjects.add(physC);
-//        physicsObjects.add(physA);
-//        physicsObjects.add(physB);
+        physicsObjects.add(physA);
+        physicsObjects.add(physB);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -179,16 +179,6 @@ public class GamePlayScreen extends Activity {
         simulationDisplayer = new SimulationDisplayRunnable(simulationDisplay, screenValues, simulationContents, simulationState);
 
         starFieldBackgroundRunnable = new StarFieldBackgroundRunnable(getApplicationContext(), starFieldBackgroundContainer, starForge, screenValues, simulationState);
-
-        StarFieldChunkView[][] chunkViews = starFieldBackgroundRunnable.getStarFieldBackground().getStarFieldChunkViews(getApplicationContext());
-        for (int i = 0; i < chunkViews.length; i++) {
-            TableRow aRow = new TableRow(getApplicationContext());
-            aRow.setWillNotDraw(false);
-            for (int j = 0; j < chunkViews[i].length; j++) {
-                aRow.addView(chunkViews[i][j]);
-            }
-            starFieldBackgroundTable.addView(aRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        }
 
         tiltMovement = new TiltMovementRunnable(new TiltAcceleration(physC, new Accelerometer(getApplicationContext())), physC, simulationState);
     }
