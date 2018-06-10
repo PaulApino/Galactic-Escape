@@ -1,9 +1,13 @@
 package com.gscape.sdp.galacticescape.Engine.Objects.Obstacle;
 
+import com.gscape.sdp.galacticescape.Engine.Objects.ObjectTypes;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
 import java.util.Random;
 
+/*Creates a Blackhole Object with attributes that will allow movement based on realistic gravity in space
+@author Michelle Extross
+*/
 public class BlackHole extends Obstacle{
 
     /**
@@ -17,7 +21,7 @@ public class BlackHole extends Obstacle{
      */
 
     public BlackHole(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
-        super(mass, collisionRadius, location, velocity, acceleration);
+        super(mass, collisionRadius, location, velocity, acceleration, ObjectTypes.BLACK_HOLE);
 //
 //        collisionRadiusMin = 400;
 //        collisionRadiusMax = 450;

@@ -2,7 +2,6 @@ package com.gscape.sdp.galacticescape;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.sax.StartElementListener;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,19 +9,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-
-import com.gscape.sdp.galacticescape.Display.ActualGame.GamePlayScreen;
-
-public class Introduction_togame extends AppCompatActivity {
+public class Introduction extends AppCompatActivity {
 
     public Button skip_intro;
 
@@ -49,7 +42,7 @@ public class Introduction_togame extends AppCompatActivity {
             @Override
             public void onPageSelected(int position)
             {
-                //Toast.makeText(Introduction_togame.this, "page " + (position + 1), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Introduction.this, "page " + (position + 1), Toast.LENGTH_SHORT).show();
 
 
 
@@ -77,7 +70,7 @@ public class Introduction_togame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent skipped = new Intent(Introduction_togame.this, User_name_selection.class );
+                Intent skipped = new Intent(Introduction.this, Playerselection.class );
                 startActivity(skipped);
             }
         });
@@ -103,21 +96,21 @@ public class Introduction_togame extends AppCompatActivity {
                 case 0:
                     if (page1 == null)
                     {
-                        page1 = (RelativeLayout) LayoutInflater.from(Introduction_togame.this).inflate(R.layout.page1_intro, null);
+                        page1 = (RelativeLayout) LayoutInflater.from(Introduction.this).inflate(R.layout.page1_intro, null);
                     }
                     page = page1;
                     break;
                 case 1:
                     if (page2 == null)
                     {
-                        page2 = (RelativeLayout) LayoutInflater.from(Introduction_togame.this).inflate(R.layout.page2_intro, null);
+                        page2 = (RelativeLayout) LayoutInflater.from(Introduction.this).inflate(R.layout.page2_intro, null);
                     }
                     page = page2;
                     break;
                 case 2:
                     if (page3 == null)
                     {
-                        page3 = (RelativeLayout) LayoutInflater.from(Introduction_togame.this).inflate(R.layout.page3_intro, null);
+                        page3 = (RelativeLayout) LayoutInflater.from(Introduction.this).inflate(R.layout.page3_intro, null);
 
                     }
                     page = page3;
@@ -125,12 +118,12 @@ public class Introduction_togame extends AppCompatActivity {
                 default:
                     if (page4 == null)
                     {
-                        page4 = (RelativeLayout) LayoutInflater.from(Introduction_togame.this).inflate(R.layout.page4_intro, null);
+                        page4 = (RelativeLayout) LayoutInflater.from(Introduction.this).inflate(R.layout.page4_intro, null);
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 finish();
-                                Intent i=new Intent(Introduction_togame.this, User_name_selection.class);
+                                Intent i=new Intent(Introduction.this, Playerselection.class);
                                 startActivity(i);
                             }
                         }, 9000);

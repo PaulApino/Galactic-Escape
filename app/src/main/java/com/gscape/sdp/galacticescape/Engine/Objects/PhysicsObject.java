@@ -12,6 +12,7 @@ public class PhysicsObject {
     protected Vector location, velocity, acceleration;
     protected boolean collided;
     protected boolean removed;
+    protected final ObjectTypes objectType;
 
     /**
      * Makes a PhysicsObject from the given values.
@@ -21,12 +22,13 @@ public class PhysicsObject {
      * @param velocity the velocity of the object.
      * @param acceleration the acceleration of the object.
      */
-    public PhysicsObject(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
+    public PhysicsObject(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration, ObjectTypes objectType) {
         this.mass = mass;
         this.collisionRadius = collisionRadius;
         this.location = location;
         this.velocity = velocity;
         this.acceleration = acceleration;
+        this.objectType = objectType;
         collided = false;
         removed = false;
     }
@@ -59,6 +61,10 @@ public class PhysicsObject {
         return acceleration;
     }
 
+    public ObjectTypes getObjectType() {
+        return objectType;
+    }
+
     public void setCollided() {
         collided = true;
     }
@@ -78,4 +84,6 @@ public class PhysicsObject {
     public void setAcceleration(Vector acceleration) {
         this.acceleration = acceleration;
     }
+
+
 }

@@ -11,8 +11,8 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/stars"
         android:backgroundTintMode="multiply"
-        android:textColor="@android:color/white"
         android:text="@string/page_one"
+        android:textColor="@android:color/white"
         android:textSize="30sp" />
 
     <TextView
@@ -23,5 +23,13 @@
         android:layout_centerHorizontal="true"
         android:text="@string/swipe_left_or_right_to_navigate_between_pages"
         android:textColor="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="437dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Imagine in a galaxy far, far away, a nuclear experiment has gone wrong, and has resulted in the end of the universe as we know it."
+        android:textSize="24sp" />
 
 </RelativeLayout>

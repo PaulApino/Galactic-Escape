@@ -1,6 +1,8 @@
 package com.gscape.sdp.galacticescape.Display.StarFieldBackground;
 
 import android.content.Context;
+import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 
 import com.gscape.sdp.galacticescape.Display.ActualGame.ScreenValues;
@@ -19,13 +21,18 @@ public class StarFieldBackgroundRunnable implements Runnable {
     private final ScreenValues screenValues;
     private final SimulationState simulationState;
 
+    private final GridLayout starGrid;
+
     public StarFieldBackgroundRunnable(Context context, RelativeLayout container, StarForge starForge, ScreenValues screenValues, SimulationState simulationState) {
         this.context = context;
         this.container = container;
         this.screenValues = screenValues;
         this.simulationState = simulationState;
-        this.starFieldBackground = new StarFieldBackground(starForge, screenValues);
-        this.starFieldChunkViews = initViews();
+        this.starFieldBackground = new StarFieldBackground(context, starForge, screenValues);
+        this.starGrid = new GridLayout(context);
+        this.starFieldChunkViews = starFieldBackground.getStarFieldChunkViews();
+
+        initGrid();
     }
 
     @Override
@@ -34,53 +41,42 @@ public class StarFieldBackgroundRunnable implements Runnable {
             int distChunkCentX = (int)screenValues.getScreenCentreLocation().getX() - (starFieldBackground.getCentreChunkX() + 500);
             int distChunkCentY = (int)screenValues.getScreenCentreLocation().getY() - (starFieldBackground.getCentreChunkY() + 500);
 
-            int newCentreDirection = getNewChunkDirection(distChunkCentX, distChunkCentY);
-
-            if (newCentreDirection != NO_DIRECTION) {
-                starFieldBackground.backgroundUpdate(newCentreDirection);
-                setChunkViews();
-            }
-
             int containerDistX = ((int)(screenValues.getScreenSize().getX() / 2) - distChunkCentX) - (500 + (1000 * starFieldBackground.getSideChunkCountX()));
             int containerDistY = ((int)(screenValues.getScreenSize().getY() / 2) - distChunkCentY) - (500 + (1000 * starFieldBackground.getSideChunkCountY()));
 
             final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)container.getLayoutParams();
             layoutParams.leftMargin = containerDistX;
             layoutParams.bottomMargin = containerDistY;
+
             container.post(new Runnable() {
                 @Override
                 public void run() {
                     container.setLayoutParams(layoutParams);
-                    container.invalidate();
                 }
             });
 
+            if (starFieldBackground.backgroundUpdate(getNewChunkDirection(distChunkCentX, distChunkCentY))) {
+                starFieldBackground.updateStarFieldChunkViews();
+            }
+
             try {
-                Thread.sleep(17);
+                Thread.sleep(15);
             } catch (InterruptedException e) {}
         }
     }
 
-    public StarFieldBackground getStarFieldBackground() {
-        return starFieldBackground;
-    }
+    private void initGrid() {
+        ViewGroup.LayoutParams gridLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        starGrid.setRowCount(starFieldBackground.getMaxMatrixRow());
+        starGrid.setColumnCount(starFieldBackground.getMaxMatrixColumn());
+        container.addView(starGrid, gridLayoutParams);
 
-    private StarFieldChunkView[][] initViews () {
-        StarFieldChunkView[][] initViews = new StarFieldChunkView[starFieldBackground.getMaxMatrixRow()][starFieldBackground.getMaxMatrixColumn()];
-        StarFieldChunk[][] initChunks = starFieldBackground.getStarFieldChunks();
         for (int i = 0; i < starFieldBackground.getMaxMatrixRow(); i++) {
             for (int j = 0; j < starFieldBackground.getMaxMatrixColumn(); j++) {
-                initViews[i][j] = new StarFieldChunkView(context, initChunks[i][j]);
-            }
-        }
-        return initViews;
-    }
-
-    private void setChunkViews () {
-        StarFieldChunk[][] chunks = starFieldBackground.getStarFieldChunks();
-        for (int i = 0; i < starFieldChunkViews.length; i++) {
-            for (int j = 0; j < starFieldChunkViews[i].length; j++) {
-                starFieldChunkViews[i][j].setNewChunk(chunks[i][j]);
+                GridLayout.LayoutParams chunkParams = new GridLayout.LayoutParams(GridLayout.spec(i), GridLayout.spec(j));
+                chunkParams.height = 1000;
+                chunkParams.width = 1000;
+                starGrid.addView(starFieldChunkViews[i][j], chunkParams);
             }
         }
     }
