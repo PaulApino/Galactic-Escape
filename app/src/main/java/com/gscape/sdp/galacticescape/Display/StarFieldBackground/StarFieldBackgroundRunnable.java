@@ -65,10 +65,6 @@ public class StarFieldBackgroundRunnable implements Runnable {
         }
     }
 
-    public StarFieldBackground getStarFieldBackground() {
-        return starFieldBackground;
-    }
-
     private void initGrid() {
         ViewGroup.LayoutParams gridLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         starGrid.setRowCount(starFieldBackground.getMaxMatrixRow());

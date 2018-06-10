@@ -1,5 +1,6 @@
 package com.gscape.sdp.galacticescape.Engine.Objects.Obstacle;
 
+import com.gscape.sdp.galacticescape.Engine.Objects.ObjectTypes;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
 
@@ -17,7 +18,7 @@ public class Obstacle extends PhysicsObject {
      * @param acceleration    the acceleration of the object.
      */
 
-    protected Obstacle(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration) {
-        super(mass, collisionRadius, location, velocity, acceleration);
+    protected Obstacle(double mass, double collisionRadius, Vector location, Vector velocity, Vector acceleration, ObjectTypes objectType) {
+        super(mass, collisionRadius, location, velocity, acceleration, objectType);
     }
 }
