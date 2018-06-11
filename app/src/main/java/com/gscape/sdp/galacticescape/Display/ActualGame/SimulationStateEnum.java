@@ -1,10 +1,8 @@
-package com.gscape.sdp.galacticescape.Engine.Physics;
+package com.gscape.sdp.galacticescape.Display.ActualGame;
 
 public enum SimulationStateEnum {
     SIMULATION_STOPPED,
     SIMULATION_INITIALIZING,
-    SIMULATION_PAUSED,
-    SIMULATION_RESUMED,
     SIMULATION_RUNNING,
     SIMULATION_BACKGROUND_STOPPED,
     SIMULATION_BACKGROUND_RUNNING,

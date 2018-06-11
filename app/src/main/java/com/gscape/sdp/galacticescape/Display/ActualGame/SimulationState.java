@@ -1,7 +1,5 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
-import com.gscape.sdp.galacticescape.Engine.Physics.SimulationStateEnum;
-
 public class SimulationState {
 
     private SimulationStateEnum generalState;
@@ -20,14 +18,6 @@ public class SimulationState {
 
     public boolean isRunning() {
         return generalState == SimulationStateEnum.SIMULATION_RUNNING;
-    }
-
-    public boolean isPaused() {
-        return generalState == SimulationStateEnum.SIMULATION_PAUSED;
-    }
-
-    public boolean isResumed() {
-        return generalState == SimulationStateEnum.SIMULATION_RESUMED;
     }
 
     public boolean isStopped() {
@@ -76,14 +66,6 @@ public class SimulationState {
 
     public void setRunning() {
         generalState = SimulationStateEnum.SIMULATION_RUNNING;
-    }
-
-    public void setPaused() {
-        generalState = SimulationStateEnum.SIMULATION_PAUSED;
-    }
-
-    public void setResumed() {
-        generalState = SimulationStateEnum.SIMULATION_RESUMED;
     }
 
     public void setStopped() {

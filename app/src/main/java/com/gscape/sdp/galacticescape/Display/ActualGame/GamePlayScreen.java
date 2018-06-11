@@ -19,7 +19,10 @@ import android.widget.TableRow;
 import com.gscape.sdp.galacticescape.Display.StarFieldBackground.StarFieldBackgroundRunnable;
 import com.gscape.sdp.galacticescape.Display.StarFieldBackground.StarFieldChunkView;
 import com.gscape.sdp.galacticescape.Display.StarFieldBackground.StarForge;
+import com.gscape.sdp.galacticescape.Engine.Objects.Obstacle.Obstacle;
+import com.gscape.sdp.galacticescape.Engine.Objects.ObstacleManager;
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
+import com.gscape.sdp.galacticescape.Engine.Objects.Player;
 import com.gscape.sdp.galacticescape.Engine.Physics.GravitationCalculator;
 import com.gscape.sdp.galacticescape.Engine.Physics.SimulationRunnable;
 import com.gscape.sdp.galacticescape.Engine.Physics.Vector;
@@ -52,7 +55,12 @@ public class GamePlayScreen extends Activity {
 //    private ScreenValues screenValues;
 //    private StarForge starForge;
 
-    private
+    private ObstacleManager obstacleManager;
+
+    private ObjectViewPair player;
+    private SimulationState simulationState;
+    private SimulationContents simulationContents;
+    private ScreenValues screenValues;
 
     private SimulationRunnable simulationRunnable;
     private SimulationDisplayRunnable simulationDisplayRunnable;
@@ -106,6 +114,34 @@ public class GamePlayScreen extends Activity {
 //        frontSim.start();
 //        starSim.start();
 //        tiltSimulation.start();
+    }
+
+    private void initSetup() {
+
+    }
+
+    private void initGameState() {
+        simulationState = new SimulationState();
+        obstacleManager = new ObstacleManager();
+
+        makePlayer();
+        simulationContents = new SimulationContents(player, )
+    }
+
+    private void makePlayer () {
+        PhysicsObject thePlayer = new Player(100, 40,
+                Vector.make2D(0, 0),
+                Vector.make2D(0, 1.5),
+                Vector.make2D(0, 0));
+        player = ObjectViewPair.getObjectValuePair(getApplicationContext(), thePlayer);
+    }
+
+    private ArrayList<ObjectViewPair> getObstacle () {
+        ArrayList<ObjectViewPair> objectViewPairs = new ArrayList<>(30);
+        for (int i = 0; i < 5; i++) {
+            objectViewPairs.add(ObjectViewPair.getObjectValuePair(getApplicationContext(), obstacleManager.generateObstacle()));
+        }
+        return objectViewPairs;
     }
 
 //    private void init() {
