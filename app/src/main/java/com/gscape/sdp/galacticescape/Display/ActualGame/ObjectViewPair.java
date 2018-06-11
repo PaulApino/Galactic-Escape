@@ -14,8 +14,6 @@ import java.util.Random;
 
 public class ObjectViewPair {
 
-//    private static final Bitmap image
-
     private static final Random rand = new Random();
 
     private final PhysicsObject physicsObject;

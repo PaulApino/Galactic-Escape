@@ -39,7 +39,7 @@ public class SimulationRunnable implements Runnable {
 
                     simulationState.setBackgroundFinished();
 
-                    Thread.sleep(15);
+                    Thread.sleep(20);
                 }
             }
         } catch (InterruptedException e) {

@@ -60,7 +60,7 @@ public class StarFieldBackgroundRunnable implements Runnable {
             }
 
             try {
-                Thread.sleep(15);
+                Thread.sleep(20);
             } catch (InterruptedException e) {}
         }
     }

@@ -52,18 +52,18 @@ public class SimulationDisplayRunnable implements Runnable {
                             layoutParams.bottomMargin = (int)(deltaV.getY() - imageOffset);
                             container.post(new LayoutParameterUpdate(currentImgObject, layoutParams));
                         }
-
-//                        container.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                container.invalidate();
-//                            }
-//                        });
                     }
+
+                    container.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            container.invalidate();
+                        }
+                    });
 
                     simulationState.setDisplayFinished();
 
-                    Thread.sleep(15);
+                    Thread.sleep(20);
                 }
             }
         } catch (InterruptedException e) {

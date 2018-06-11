@@ -67,7 +67,7 @@ public class StarFieldBackground {
     }
 
     private void generateChunk(StarFieldChunk starFieldChunk) {
-        starFieldChunk.generateChunk(starForge, 70);
+        starFieldChunk.generateChunk(starForge, 40);
     }
 
     public StarFieldChunk[][] getStarFieldChunks() {
