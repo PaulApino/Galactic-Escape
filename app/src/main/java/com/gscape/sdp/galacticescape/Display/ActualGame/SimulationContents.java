@@ -1,6 +1,7 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.gscape.sdp.galacticescape.Engine.Objects.PhysicsObject;
@@ -20,10 +21,15 @@ public class SimulationContents {
     public SimulationContents(ObjectViewPair player, ArrayList<ObjectViewPair> objectViewPairs) {
         this.player = player;
         this.objectViewPairs = objectViewPairs;
+        this.objectViewPairs.add(0, this.player);
     }
 
     public ArrayList<ObjectViewPair> getObjectViewPairs() {
         return objectViewPairs;
+    }
+
+    public ObjectViewPair getPlayer() {
+        return player;
     }
 
     public ObjectViewPair getPairOf (PhysicsObject targetObject) {

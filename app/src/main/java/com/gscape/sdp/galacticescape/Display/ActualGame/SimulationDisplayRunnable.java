@@ -26,15 +26,13 @@ public class SimulationDisplayRunnable implements Runnable {
     @Override
     public void run() {
         try {
-            while (simulationState.isRunning() | simulationState.isResumed()) {
+            while (simulationState.isRunning()) {
                 if (simulationState.isSafeDisplay()) {
 
-                    ArrayList<ImageView> imageObjects = contents.getImageObjects();
-
                     synchronized (contents) {
-                        ArrayList<PhysicsObject> physicsObjects = contents.getPhysicsObjects();
+                        ArrayList<ObjectViewPair> objectViewPairs = contents.getObjectViewPairs();
 
-                        PhysicsObject player = physicsObjects.get(0);
+                        PhysicsObject player = contents.getPlayer().getPhysicsObject();
                         screenValues.setScreenCentreLocation(Vector.make2D(
                                 player.getLocation().getX(),
                                 player.getLocation().getY()));
@@ -42,10 +40,10 @@ public class SimulationDisplayRunnable implements Runnable {
                                 player.getLocation().getX() - (screenValues.getScreenSize().getX() / 2),
                                 player.getLocation().getY() - (screenValues.getScreenSize().getY() / 2)));
 
-                        for (int i = 1; i < imageObjects.size(); i++) {
-                            Vector currentPhysObjectLocation = physicsObjects.get(i).getLocation();
-                            double imageOffset = physicsObjects.get(i).getCollisionRadius();
-                            ImageView currentImgObject = imageObjects.get(i);
+                        for (int i = 1; i < objectViewPairs.size(); i++) {
+                            Vector currentPhysObjectLocation = objectViewPairs.get(i).getPhysicsObject().getLocation();
+                            double imageOffset = objectViewPairs.get(i).getPhysicsObject().getCollisionRadius();
+                            ImageView currentImgObject = objectViewPairs.get(i).getImageView();
 
                             Vector deltaV = currentPhysObjectLocation.minus(screenValues.getScreenLocation());
 
@@ -55,12 +53,12 @@ public class SimulationDisplayRunnable implements Runnable {
                             container.post(new LayoutParameterUpdate(currentImgObject, layoutParams));
                         }
 
-                        container.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                container.invalidate();
-                            }
-                        });
+//                        container.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                container.invalidate();
+//                            }
+//                        });
                     }
 
                     simulationState.setDisplayFinished();

@@ -17,7 +17,7 @@ public class TiltMovementRunnable implements Runnable {
 
     @Override
     public void run() {
-        while (simulationState.isRunning() || simulationState.isResumed()) {
+        while (simulationState.isRunning()) {
             try {
                 tiltAcceleration.setTiltAcceleration();
                 Thread.sleep(50);

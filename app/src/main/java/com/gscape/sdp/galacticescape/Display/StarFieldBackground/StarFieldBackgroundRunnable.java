@@ -37,7 +37,7 @@ public class StarFieldBackgroundRunnable implements Runnable {
 
     @Override
     public void run() {
-        while(simulationState.isRunning() | simulationState.isResumed()) {
+        while(simulationState.isRunning()) {
             int distChunkCentX = (int)screenValues.getScreenCentreLocation().getX() - (starFieldBackground.getCentreChunkX() + 500);
             int distChunkCentY = (int)screenValues.getScreenCentreLocation().getY() - (starFieldBackground.getCentreChunkY() + 500);
 

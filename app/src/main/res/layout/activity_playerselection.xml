@@ -49,7 +49,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="14dp"
-        android:background="@drawable/ship"
+        android:background="@drawable/player"
         android:elevation="24dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Take Off!"

@@ -49,10 +49,10 @@ public class ObstacleManager {
         collisionRadiusMax = 0;
 
         xMin = 300;
-        xMax = 900;
+        xMax = 1500;
 
         yMin = 300;
-        yMax = 900;
+        yMax = 1500;
 
         initialVelocity = Vector.make2DPolar(0,0);
         initialAcceleration = Vector.make2DPolar(0,0);
@@ -106,7 +106,7 @@ public class ObstacleManager {
         {
             massMax = 600;
             massMin = 50;
-            collisionRadiusMax = 600;
+            collisionRadiusMax = 100;
             collisionRadiusMin = 50;
 
             double planetEarthLikeMass = generateObstacleMass(massMax, massMin);
@@ -122,8 +122,8 @@ public class ObstacleManager {
         {
             massMax = 3000;
             massMin = 1500;
-            collisionRadiusMax = 700;
-            collisionRadiusMin = 500;
+            collisionRadiusMax = 200;
+            collisionRadiusMin = 70;
 
             double planetGasMass = generateObstacleMass(massMax, massMin);
             double planetGasCollisionRadius = generateCollisionRadius(collisionRadiusMax, collisionRadiusMin);
@@ -135,8 +135,8 @@ public class ObstacleManager {
         {
             massMax = 40;
             massMin = 10;
-            collisionRadiusMax = 100;
-            collisionRadiusMin = 50;
+            collisionRadiusMax = 50;
+            collisionRadiusMin = 20;
 
             double planetRockyMass = generateObstacleMass(massMax, massMin);
             double planetRockyCollisionRadius = generateCollisionRadius(collisionRadiusMax, collisionRadiusMin);
@@ -148,7 +148,7 @@ public class ObstacleManager {
             massMax = 40;
             massMin = 10;
             collisionRadiusMax = 100;
-            collisionRadiusMin = 50;
+            collisionRadiusMin = 70;
 
             double planetScorchedMass = generateObstacleMass(massMax, massMin);
             double planetScorchedCollisionRadius = generateCollisionRadius(collisionRadiusMax, collisionRadiusMin);
@@ -158,10 +158,10 @@ public class ObstacleManager {
 
         else if (pickObstacle == 5)
         {
-            massMax = 5000*Math.pow(10, 6);
-            massMin = 1000*Math.pow(10, 6);
-            collisionRadiusMax = 700;
-            collisionRadiusMin = 500;
+            massMax = 5000/**Math.pow(10, 6)*/;
+            massMin = 1000/**Math.pow(10, 6)*/;
+            collisionRadiusMax = 300;
+            collisionRadiusMin = 100;
 
             double blackHoleMass = generateObstacleMass(massMax, massMin);
             double blackHoleCollisionRadius = generateCollisionRadius(collisionRadiusMax, collisionRadiusMin);
@@ -173,8 +173,8 @@ public class ObstacleManager {
         {
             massMax = 5;
             massMin = 0.1;
-            collisionRadiusMax = 70;
-            collisionRadiusMin = 50;
+            collisionRadiusMax = 40;
+            collisionRadiusMin = 30;
 
             double meteorMass = generateObstacleMass(massMax, massMin);
             double meteorCollisionRadius = generateCollisionRadius(collisionRadiusMax, collisionRadiusMin);
@@ -186,8 +186,8 @@ public class ObstacleManager {
         {
             massMax = 0.01;
             massMin = 0.001;
-            collisionRadiusMax = 75;
-            collisionRadiusMin = 50;
+            collisionRadiusMax = 30;
+            collisionRadiusMin = 20;
 
             double satelliteMass = generateObstacleMass(massMax, massMin);
             double satelliteCollisionRadius = generateCollisionRadius(collisionRadiusMax, collisionRadiusMin);

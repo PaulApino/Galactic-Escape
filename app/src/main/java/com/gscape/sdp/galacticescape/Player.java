@@ -50,7 +50,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
+        return "player{" +
                 "Username='" + Username + "\n" +
                 ", achievements='" + achievements + "\n" +
                 ", currentPos='" + currentPos + "\n" +

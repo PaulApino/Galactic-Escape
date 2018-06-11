@@ -65,7 +65,7 @@ public class Playerselection extends AppCompatActivity {
                     u.setLives("1");
                     u.setScore("0");
                     mRootReference.child(u.getUsername()).setValue(u);
-                    Toast.makeText(Playerselection.this, "Player Name created successfully!",
+                    Toast.makeText(Playerselection.this, "player Name created successfully!",
                             Toast.LENGTH_SHORT).show();
 
                     new Handler().postDelayed(new Runnable() {
