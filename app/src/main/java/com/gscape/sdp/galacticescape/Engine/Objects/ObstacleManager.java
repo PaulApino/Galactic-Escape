@@ -104,8 +104,8 @@ public class ObstacleManager {
         int pickObstacle = r.nextInt(7)+1;
         if (pickObstacle == 1)
         {
-            massMax = 600;
-            massMin = 50;
+            massMax = 900;
+            massMin = 200;
             collisionRadiusMax = 100;
             collisionRadiusMin = 50;
 
@@ -120,8 +120,8 @@ public class ObstacleManager {
 
        else if (pickObstacle == 2)
         {
-            massMax = 3000;
-            massMin = 1500;
+            massMax = 30000;
+            massMin = 15000;
             collisionRadiusMax = 200;
             collisionRadiusMin = 70;
 
@@ -133,10 +133,10 @@ public class ObstacleManager {
         }
         else if (pickObstacle == 3)
         {
-            massMax = 40;
-            massMin = 10;
-            collisionRadiusMax = 50;
-            collisionRadiusMin = 20;
+            massMax = 600;
+            massMin = 200;
+            collisionRadiusMax = 80;
+            collisionRadiusMin = 50;
 
             double planetRockyMass = generateObstacleMass(massMax, massMin);
             double planetRockyCollisionRadius = generateCollisionRadius(collisionRadiusMax, collisionRadiusMin);
@@ -145,8 +145,8 @@ public class ObstacleManager {
         }
         else if (pickObstacle == 4)
         {
-            massMax = 40;
-            massMin = 10;
+            massMax = 600;
+            massMin = 100;
             collisionRadiusMax = 100;
             collisionRadiusMin = 70;
 
@@ -158,8 +158,8 @@ public class ObstacleManager {
 
         else if (pickObstacle == 5)
         {
-            massMax = 5000/**Math.pow(10, 6)*/;
-            massMin = 1000/**Math.pow(10, 6)*/;
+            massMax = 100000;
+            massMin = 50000;
             collisionRadiusMax = 300;
             collisionRadiusMin = 100;
 
@@ -171,8 +171,8 @@ public class ObstacleManager {
 
         else if (pickObstacle == 6)
         {
-            massMax = 5;
-            massMin = 0.1;
+            massMax = 50;
+            massMin = 10;
             collisionRadiusMax = 40;
             collisionRadiusMin = 30;
 
@@ -184,10 +184,10 @@ public class ObstacleManager {
 
         else if (pickObstacle == 7)
         {
-            massMax = 0.01;
-            massMin = 0.001;
-            collisionRadiusMax = 30;
-            collisionRadiusMin = 20;
+            massMax = 0.1;
+            massMin = 0.01;
+            collisionRadiusMax = 50;
+            collisionRadiusMin = 40;
 
             double satelliteMass = generateObstacleMass(massMax, massMin);
             double satelliteCollisionRadius = generateCollisionRadius(collisionRadiusMax, collisionRadiusMin);

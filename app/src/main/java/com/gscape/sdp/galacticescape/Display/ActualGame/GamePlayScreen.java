@@ -1,7 +1,6 @@
 package com.gscape.sdp.galacticescape.Display.ActualGame;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import com.gscape.sdp.galacticescape.Movement.Accelerometer;
 import com.gscape.sdp.galacticescape.Movement.TiltAcceleration;
 import com.gscape.sdp.galacticescape.Movement.TiltMovementRunnable;
 import com.gscape.sdp.galacticescape.R;
-import com.gscape.sdp.galacticescape.Submenu;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -95,7 +93,7 @@ public class GamePlayScreen extends Activity {
         simulationState = new SimulationState();
 
         starForge = new StarForge(1234);
-        gravitationCalculator = new GravitationCalculator(0.016123);
+        gravitationCalculator = new GravitationCalculator(0.026123);
         obstacleManager = new ObstacleManager();
 
         makePlayer();
@@ -123,7 +121,7 @@ public class GamePlayScreen extends Activity {
     }
 
     private void makePlayer () {
-        Player thePlayer = new Player(100, 70,
+        Player thePlayer = new Player(5, 70,
                 Vector.make2D(0, 0),
                 Vector.make2D(0, 1),
                 Vector.make2D(0, 0));
@@ -137,7 +135,7 @@ public class GamePlayScreen extends Activity {
 
     private ArrayList<ObjectViewPair> getObstacles () {
         ArrayList<ObjectViewPair> objectViewPairs = new ArrayList<>(30);
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 20; i++) {
             objectViewPairs.add(ObjectViewPair.getObjectValuePair(getApplicationContext(), obstacleManager.generateObstacle((Player)player.getPhysicsObject())));
         }
         return objectViewPairs;
