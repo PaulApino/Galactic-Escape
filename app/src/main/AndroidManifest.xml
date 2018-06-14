@@ -31,13 +31,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_game_play_screen"
             android:screenOrientation="landscape">
-
-             <!--<intent-filter>-->
-             <!--<action android:name="android.intent.action.MAIN" />-->
-
-
-             <!--<category android:name="android.intent.category.LAUNCHER" />-->
-             <!--</intent-filter>-->
         </activity>
         <activity android:name=".Playerselection"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -54,13 +47,6 @@
             android:configChanges="orientation|keyboard|screenSize"
             android:label="StarFieldTest"
             android:screenOrientation="landscape">
-
-             <!--<intent-filter>-->
-             <!--<action android:name="android.intent.action.MAIN" />-->
-
-
-             <!--<category android:name="android.intent.category.LAUNCHER" />-->
-             <!--</intent-filter>-->
         </activity>
         <activity android:name=".ControlPopup"
             android:configChanges="orientation|keyboardHidden|screenSize"

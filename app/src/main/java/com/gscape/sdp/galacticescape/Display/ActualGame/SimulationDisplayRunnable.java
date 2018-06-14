@@ -63,7 +63,7 @@ public class SimulationDisplayRunnable implements Runnable {
 
                     simulationState.setDisplayFinished();
 
-                    Thread.sleep(20);
+                    Thread.sleep(15);
                 }
             }
         } catch (InterruptedException e) {

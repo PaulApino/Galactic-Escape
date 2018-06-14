@@ -137,7 +137,7 @@ public class GamePlayScreen extends Activity {
 
     private ArrayList<ObjectViewPair> getObstacles () {
         ArrayList<ObjectViewPair> objectViewPairs = new ArrayList<>(30);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             objectViewPairs.add(ObjectViewPair.getObjectValuePair(getApplicationContext(), obstacleManager.generateObstacle((Player)player.getPhysicsObject())));
         }
         return objectViewPairs;
